@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+#include <atcoder/all>
+using namespace std;
+using i32 = int32_t;
+using i64 = int64_t;
+using u32 = uint32_t;
+using u64 = uint64_t;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define all(a) (a).begin(), (a).end()
+const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
+const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
+
+inline int64_t div_floor(int64_t a, int64_t b) {
+  if (b < 0) {
+    a *= -1;
+    b *= -1;
+  }
+  if (a < 0) {
+    return (a + 1) / b - 1;
+  } else {
+    return a / b;
+  }
+}
+
+inline int64_t div_ceil(int64_t a, int64_t b) {
+  return div_floor(a + b - 1, b);
+}
+
+int main() {
+  i32 X, Y, Z;
+  cin >> X >> Y >> Z;
+  if (Y < 0) {
+    X *= -1;
+    Y *= -1;
+    Z *= -1;
+  }
+  if (X < Y) {
+    // 壁より内側に目標がある
+    cout << abs(X) << endl;
+    return 0;
+  }
+
+  // 壁の外側に目標がある
+  if (Y < Z) {
+    // 鍵が壁の外側にある（取得不能）
+    cout << -1 << endl;
+  } else {
+    cout << abs(Z) + abs(X - Z) << endl;
+  }
+}

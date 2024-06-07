@@ -1,0 +1,61 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "c++ build for AtCoder",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "g++-13",
+            "args": [
+                "-I",
+                "${workspaceFolder}/ac-library/",
+                "-std=c++2b",
+                "-g",
+                "-O0",
+                "-Wall",
+                "-Wextra",
+                "${file}",
+                "-o",
+                "${fileDirname}/a.out"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "oj t",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}",
+            },
+            "command": "oj",
+            "args": [
+                "t",
+                "--ignore-spaces",
+                "-d",
+                "./tests"
+            ],
+            "dependsOn": [
+                "c++ build for AtCoder"
+            ],
+            "group": "test"
+        },
+        {
+            "label": "submit",
+            "type": "shell",
+            "options": {
+                "cwd": "${fileDirname}",
+            },
+            "command": "acc",
+            "args": [
+                "submit",
+                "${fileBasename}"
+            ],
+            "dependsOn": [
+                "c++ build for AtCoder",
+                "oj t",
+            ],
+            "group": "test"
+        }
+    ]
+}

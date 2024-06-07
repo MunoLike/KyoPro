@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/*",
+                "${workspaceFolder}/ac-library"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++-13",
+            "cStandard": "c23",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}
