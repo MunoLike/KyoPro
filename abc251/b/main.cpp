@@ -11,6 +11,23 @@ using u64 = uint64_t;
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
+template <class S, class T>
+inline S prevent_oor(S a, const T b) {
+  a %= b;
+  if (a < 0) {
+    a += b;
+  }
+  return a;
+}
+
+template <class S, class T>
+inline S chmax(S &a, T b) {
+  if (a < b) {
+    a = b;
+  }
+  return a;
+}
+
 inline int64_t div_floor(int64_t a, int64_t b) {
   if (b < 0) {
     a *= -1;
@@ -28,5 +45,6 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-
+  i32 N, W;
+  
 }
