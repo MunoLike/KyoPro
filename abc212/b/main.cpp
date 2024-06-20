@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,19 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  string S;
+  cin >> S;
+  set<char> p(all(S));
+  if (p.size() == 1) {
+    cout << "Weak\n";
+    return 0;
+  }
 
+  cout << (adjacent_find(all(S), [](char l, char r) -> bool {
+    if (l == '9' && r == '0') return false;
+    return (l + 1) != r; }) == S.end() ? "Weak\n" : "Strong\n");
 }

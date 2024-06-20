@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -21,7 +21,7 @@ inline S prevent_oor(S a, const T b) {
 }
 
 template <class S, class T>
-inline S chmax(S &a, T b) {
+inline S chmax(S& a, T b) {
   if (a < b) {
     a = b;
   }
@@ -41,9 +41,18 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
-
+  i32 N;
+  cin >> N;
+  vector<pair<i32, i32>> score;
+  rep(i, N) {
+    i32 a;
+    cin >> a;
+    score.emplace_back(i + 1, a);
+  }
+  sort(all(score), [](const auto& lhs, const auto& rhs) { return lhs.second > rhs.second; });
+  cout << score[1].first << endl;
 }

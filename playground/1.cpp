@@ -45,20 +45,10 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-  i32 K;
-  string A, B;
-  cin >> K >> A >> B;
-
-  i64 ca = 0, cb = 0;
-  rep(i, A.size()) {
-    ca *= K;
-    ca += (A[i] - '0');
+  vector<string> a{"ABC", "DEF"};
+  vector<string> b{"JKL", "YUI"};
+  for (auto x : {a[0], b[0]}) {
+    cout << x << " ";
   }
-
-  rep(i, B.size()) {
-    cb *= K;
-    cb += (B[i] - '0');
-  }
-
-  cout << ca * cb << endl;
+  cout << endl;
 }
