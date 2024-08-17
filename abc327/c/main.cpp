@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,54 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  i32 A[9][9];
 
+  rep(i, 9) {
+    rep(j, 9) {
+      cin >> A[i][j];
+    }
+  }
+
+  rep(i, 9) {
+    set<i32> contain;
+    rep(j, 9) {
+      contain.insert(A[i][j]);
+    }
+    if (contain.size() != 9) {
+      cout << "No\n";
+      return 0;
+    }
+  }
+
+  rep(j, 9) {
+    set<i32> contain;
+    rep(i, 9) {
+      contain.insert(A[i][j]);
+    }
+    if (contain.size() != 9) {
+      cout << "No\n";
+      return 0;
+    }
+  }
+
+  rep(i, 3) {
+    rep(j, 3) {
+      set<i32> contain;
+      rep(k, 3) {
+        rep(l, 3) {
+          contain.insert(A[i * 3 + k][j * 3 + l]);
+        }
+      }
+      if (contain.size() != 9) {
+        cout << "No\n";
+        return 0;
+      }
+    }
+  }
+
+  cout << "Yes\n";
 }

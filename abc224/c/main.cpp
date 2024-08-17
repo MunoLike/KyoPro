@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,28 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  i32 N;
+  cin >> N;
+  vector<i64> x(N), y(N);
+  rep(i, N) {
+    cin >> x[i] >> y[i];
+  }
 
+  i32 count = 0;
+  for (i32 i = 0; i < N; ++i) {
+    for (i32 j = i; j < N; ++j) {
+      for (i32 k = j; k < N; ++k) {
+        i64 abx = x[i] - x[j], aby = y[i] - y[j];
+        i64 acx = x[i] - x[k], acy = y[i] - y[k];
+
+        count += (abs(abx * acy - aby * acx) > 0);
+      }
+    }
+  }
+
+  cout << count << '\n';
 }

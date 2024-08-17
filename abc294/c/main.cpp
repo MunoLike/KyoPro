@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,25 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  i32 N, M;
+  cin >> N >> M;
+  vector<i32> A(N, 0), B(M, 0), C(N + M, 0);
+  rep(i, N) {
+    cin >> A[i], C[i] = A[i];
+  }
+  rep(i, M) {
+    cin >> B[i], C[i + N] = B[i];
+  }
 
+  inplace_merge(C.begin(), C.begin() + N, C.end());
+  rep(i, N) {
+    cout << lower_bound(all(C), A[i]) - C.begin() + 1 << (i < N - 1 ? ' ' : '\n');
+  }
+  rep(i, M) {
+    cout << lower_bound(all(C), B[i]) - C.begin() + 1 << (i < M - 1 ? ' ' : '\n');
+  }
 }

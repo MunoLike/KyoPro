@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,36 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(nullptr);
 
+  i32 N;
+  cin >> N;
+  vector<pair<i32, i32>> flavor;
+
+  rep(i, N) {
+    i32 f, s;
+    cin >> f >> s;
+    flavor.emplace_back(s, f);
+  }
+
+  sort(all(flavor));
+
+  i32 first_tasty = flavor.back().first;
+  i32 ans = 0;
+  i32 first_flavor = flavor.back().second;
+
+  for (i32 i = 0; i < N - 1; ++i) {
+    if (flavor[i].second == first_flavor) {
+      ans = max(ans, flavor[i].first / 2 + first_tasty);
+    } else {
+      ans = max(ans, flavor[i].first + first_tasty);
+    }
+  }
+
+  cout << ans << endl;
 }

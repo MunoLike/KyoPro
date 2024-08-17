@@ -7,7 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
@@ -41,9 +41,28 @@ inline int64_t div_floor(int64_t a, int64_t b) {
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+  return div_floor(a + b - 1, b);
 }
 
 int main() {
+  i64 N;
+  string S;
+  cin >> N >> S;
 
+  i32 maxlen = -1;
+
+  for (i32 i = 0; i < N;) {
+    if (S[i] == '-') {
+      ++i;
+    } else {
+      i32 r = i;
+      while (r < N && S[r] == 'o') ++r;
+      if ((0 < i && S[i - 1] == '-') || (r < N && S[r] == '-')) {
+        chmax(maxlen, r - i);
+      }
+      i = r;
+    }
+  }
+
+  cout << maxlen << '\n';
 }

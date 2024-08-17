@@ -45,5 +45,8 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i32 N, M;
+    cin >> N >> M;
 
+    
 }
