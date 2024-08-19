@@ -7,6 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
 #define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
@@ -23,6 +24,14 @@ inline S prevent_oor(S a, const T b) {
 template <class S, class T>
 inline S chmax(S &a, T b) {
     if (a < b) {
+        a = b;
+    }
+    return a;
+}
+
+template <class S, class T>
+inline S chmin(S &a, T b) {
+    if (a > b) {
         a = b;
     }
     return a;
@@ -45,19 +54,17 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N;
-    cin >> N;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 
-    vector<i64> num(N + 1, 0);
-    for (i64 x = 1; x <= N; ++x) {
-        for (i64 y = 1; x * y <= N; ++y) {
-            ++num[x * y];
-        }
-    }
+    i32 A, B, C;
+    cin >> A >> B >> C;
 
-    i64 sum = 0;
-    for (i64 ab = 1; ab <= N; ++ab) {
-        sum += num[ab] * num[N - ab];
-    }
-    cout << sum << '\n';
+    A = prevent_oor(A - B, 24);
+    C = prevent_oor(C - B, 24);
+    if (A < C)
+        cout << "No\n";
+    else
+        cout << "Yes\n";
 }

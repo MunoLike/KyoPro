@@ -7,6 +7,7 @@ RUN apt update &&\
     nodejs\
     npm\
     build-essential\
+    gdb\
     software-properties-common &&\
     add-apt-repository ppa:ubuntu-toolchain-r/test &&\
     apt update &&\
