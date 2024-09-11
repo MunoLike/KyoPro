@@ -28,6 +28,14 @@ inline S chmax(S &a, T b) {
     return a;
 }
 
+template <class S, class T>
+inline S chmin(S &a, T b) {
+    if (a > b) {
+        a = b;
+    }
+    return a;
+}
+
 inline int64_t div_floor(int64_t a, int64_t b) {
     if (b < 0) {
         a *= -1;
@@ -48,41 +56,33 @@ int main() {
     i32 N;
     cin >> N;
 
-    unordered_map<i32, i32> l_x, r_x;
-    vector<pair<i32, i32>> vertices_in;
+    vector<i32> x(N), y(N);
+    unordered_map<i32, vector<pair<i32, char>>> person;  // y, x座標, [L|R]
     rep(i, N) {
-        i32 x, y;
-        cin >> x >> y;
-        vertices_in.emplace_back(x, y);
+        cin >> x[i] >> y[i];
     }
 
     string S;
     cin >> S;
-
     rep(i, N) {
-        auto vert = vertices_in[i];
-        if (S[i] == 'L') {
-            auto res = l_x.insert({vert.second, vert.first});
-            if (!res.second) {
-                res.first->second = max(res.first->second, vert.first);  // 存在したものの２つめ=x座標
-            }
-        } else {
-            auto res = r_x.insert({vert.second, vert.first});
-            if (!res.second) {
-                res.first->second = min(res.first->second, vert.first);
-            }
-        }
+        person[y[i]].emplace_back(x[i], S[i]);
     }
 
-    for (auto [y, lx] : l_x) {
-        auto res = r_x.find(y);
-        if (res != r_x.end()) {
-            if (lx < res->second) {
-                cout << "Yes\n";
-                return 0;
+    for (auto [y, ps] : person) {
+        set<char> dirs;
+        i32 rmn = INT32_MAX, lmx = INT32_MIN;
+        for (auto [x, dir] : ps) {
+            dirs.emplace(dir);
+            if (dir == 'L') {
+                chmax(lmx, x);
+            } else {
+                chmin(rmn, x);
             }
         }
+        if (dirs.size() == 2 && rmn < lmx) {
+            cout << "Yes\n";
+            return 0;
+        }
     }
-
     cout << "No\n";
 }

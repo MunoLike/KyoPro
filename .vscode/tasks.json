@@ -12,6 +12,7 @@
                 "-I",
                 "${workspaceFolder}/ac-library/",
                 "-std=c++2b",
+                "-D _GLIBCXX_DEBUG",
                 "-g",
                 "-O0",
                 "-Wall",

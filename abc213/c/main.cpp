@@ -7,43 +7,63 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
 template <class S, class T>
 inline S prevent_oor(S a, const T b) {
-  a %= b;
-  if (a < 0) {
-    a += b;
-  }
-  return a;
+    a %= b;
+    if (a < 0) {
+        a += b;
+    }
+    return a;
 }
 
 template <class S, class T>
 inline S chmax(S &a, T b) {
-  if (a < b) {
-    a = b;
-  }
-  return a;
+    if (a < b) {
+        a = b;
+    }
+    return a;
 }
 
 inline int64_t div_floor(int64_t a, int64_t b) {
-  if (b < 0) {
-    a *= -1;
-    b *= -1;
-  }
-  if (a < 0) {
-    return (a + 1) / b - 1;
-  } else {
-    return a / b;
-  }
+    if (b < 0) {
+        a *= -1;
+        b *= -1;
+    }
+    if (a < 0) {
+        return (a + 1) / b - 1;
+    } else {
+        return a / b;
+    }
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+    return div_floor(a + b - 1, b);
 }
 
 int main() {
+    i32 H, W, N;
+    cin >> H >> W >> N;
+    vector<pair<i32, i32>> point;  // y, x
+    set<i32> xset, yset;
+    rep(i, N) {
+        i32 A, B;
+        cin >> A >> B;
+        --A, --B;
+        point.emplace_back(A, B);
+        yset.emplace(A);
+        xset.emplace(B);
+    }
 
+    vector<i32> ys(all(yset)), xs(all(xset));
+
+    rep(i, N) {
+        auto [y, x] = point[i];
+        auto py = lower_bound(all(ys), y) - ys.begin() + 1;
+        auto px = lower_bound(all(xs), x) - xs.begin() + 1;
+        cout << py << ' ' << px << '\n';
+    }
 }
