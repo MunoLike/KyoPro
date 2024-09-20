@@ -44,13 +44,22 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
-int main() {
-    i64 N, X, Y;
-    cin >> N >> X >> Y;
+i64 N, X, Y;
 
-    i64 red = 1, blue = 0;
-
-    while(red > 0){
-      
+i64 changing(i32 level, bool is_red) {
+    if (level < 2) {
+        return is_red ? 0 : 1;
     }
+
+    if (is_red) {
+        return changing(level - 1, true) + changing(level, false) * X;
+    } else {
+        return changing(level - 1, true) + changing(level - 1, false) * Y;
+    }
+}
+
+int main() {
+    cin >> N >> X >> Y;
+    i64 ans = changing(N, true);
+    cout << ans << '\n';
 }

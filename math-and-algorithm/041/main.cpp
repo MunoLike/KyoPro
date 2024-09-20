@@ -58,4 +58,22 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 T, N;
+    cin >> T >> N;
+
+    vector<i32> worker_num(T + 1, 0), worker_sum(T);
+    rep(i, N) {
+        i32 L, R;
+        cin >> L >> R;
+        worker_num[L] += 1;
+        worker_num[R] -= 1;
+    }
+
+    worker_sum[0] = worker_num[0];
+    for (i32 i = 1; i < T; ++i) {
+        worker_sum[i] = worker_sum[i - 1] + worker_num[i];
+    }
+
+    rep(i, T) cout << worker_sum[i] << '\n';
 }

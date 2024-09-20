@@ -58,4 +58,25 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N;
+    cin >> N;
+    vector<i64> dist(N - 1), dist_sum(N);
+    rep(i, N - 1) cin >> dist[i];
+    dist_sum[0] = 0;
+    for (i32 i = 1; i < N; ++i) {
+        dist_sum[i] = dist_sum[i - 1] + dist[i - 1];
+    }
+    i32 M;
+    cin >> M;
+    vector<i64> B(M);
+    rep(i, M) cin >> B[i], --B[i];
+
+    i32 cur = B[0];
+    i64 sum = 0;
+    for (i32 i = 1; i < M; ++i) {
+        sum += abs(dist_sum[B[i]] - dist_sum[cur]);
+        cur = B[i];
+    }
+    cout << sum << endl;
 }

@@ -58,4 +58,26 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N, Q;
+    cin >> N >> Q;
+    vector<i64> A(N + 2, 0);
+
+    rep(i, Q) {
+        i64 l, r, x;
+        cin >> l >> r >> x;
+        A[l] += x;
+        A[r + 1] += -x;
+    }
+
+    for (i32 i = 1; i < N + 1; ++i) {
+        if (A[i] > 0) {
+            cout << '<';
+        } else if (A[i] == 0) {
+            cout << '=';
+        } else {
+            cout << '>';
+        }
+    }
+    cout << endl;
 }

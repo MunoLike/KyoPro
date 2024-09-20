@@ -63,4 +63,22 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N;
+    cin >> N;
+    vector<i32> A(N), D(N - 1);
+    rep(i, N) cin >> A[i];
+    rep(i, N - 1) D[i] = A[i + 1] - A[i];
+
+    i64 cont = 0, num = 0;
+    // 区間内に2以上数が含まれている場合の数え上げ
+    for (i32 i = 0; i < D.size();) {
+        i64 j = i;
+        while (j < D.size() && D[i] == D[j]) ++j;
+        i64 n = j - i;           // n+1 注目している連続した区間に含まれている数の個数
+        num += (n + 1) * n / 2;  // 区間に含まれている数を2つ選んでできる区間の数.
+        i = j;
+    }
+
+    cout << num + N << endl;  // 数1つで等差数列なので+Nする．
 }

@@ -58,4 +58,20 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N, Q;
+    cin >> N >> Q;
+    vector<i64> A(N), B(N + 1);
+    rep(i, N) cin >> A[i];
+
+    B[0] = 0;
+    for (i32 i = 0; i < N; ++i) {
+        B[i + 1] = A[i] + B[i];
+    }
+    rep(i, Q) {
+        i64 l, r;
+        cin >> l >> r;
+        --l;
+        cout << B[r] - B[l] << endl;
+    }
 }
