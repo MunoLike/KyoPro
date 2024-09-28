@@ -58,4 +58,22 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N;
+    cin >> N;
+    vector<i64> height(N), dp(N);
+    rep(i, N) cin >> height[i];
+
+    rep(i, N) {
+        if (i == 0) {
+            dp[0] = 0;
+        } else if (i == 1) {
+            dp[1] = dp[0] + abs(height[0] - height[1]);
+        } else {
+            i64 v1 = dp[i - 1] + abs(height[i - 1] - height[i]);
+            i64 v2 = dp[i - 2] + abs(height[i - 2] - height[i]);
+            dp[i] = min(v1, v2);
+        }
+    }
+    cout << dp[N - 1] << endl;
 }

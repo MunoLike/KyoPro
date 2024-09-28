@@ -58,4 +58,23 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N, W;
+    cin >> N >> W;
+    vector<i64> weight(N), value(N);
+    rep(i, N) cin >> weight[i] >> value[i];
+
+    vector<vector<i64>> dp(N + 1, vector<i64>(W + 1, INT64_MIN));
+    dp[0][0] = 0;
+    rep1(i, N) {
+        rep(j, W + 1) {
+            if (j - weight[i - 1] >= 0) {
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1]);
+            } else {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+
+    cout << *max_element(all(dp[N])) << '\n';
 }

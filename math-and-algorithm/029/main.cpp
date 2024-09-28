@@ -58,4 +58,20 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 N;
+    cin >> N;
+    vector<i32> stair(N), dp(N);
+    rep(i, N) cin >> stair[i];
+
+    rep(i, N) {
+        if (i == 0) {
+            dp[0] = 1;
+        } else if (i == 1) {
+            dp[1] = 2;
+        } else {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+    }
+    cout << dp[N - 1] << '\n';
 }

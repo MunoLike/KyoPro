@@ -54,8 +54,32 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
+bool dp[10000 + 2][10000 + 2];
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 N, S;
+    cin >> N >> S;
+    vector<i64> A(N);
+    rep(i, N) cin >> A[i];
+
+    dp[0][0] = true;
+    rep1(i, S) dp[0][i] = false;
+    rep1(i, N) {
+        rep(j, S + 1) {
+            if (j - A[i - 1] >= 0) {
+                if (dp[i - 1][j] == true || dp[i - 1][j - A[i - 1]] == true) {
+                    dp[i][j] = true;
+                } else {
+                    dp[i][j] = false;
+                }
+            } else {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+    cout << (dp[N][S] ? "Yes" : "No") << endl;
 }
