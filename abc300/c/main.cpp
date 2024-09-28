@@ -7,43 +7,78 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
 template <class S, class T>
 inline S prevent_oor(S a, const T b) {
-  a %= b;
-  if (a < 0) {
-    a += b;
-  }
-  return a;
+    a %= b;
+    if (a < 0) {
+        a += b;
+    }
+    return a;
 }
 
 template <class S, class T>
 inline S chmax(S &a, T b) {
-  if (a < b) {
-    a = b;
-  }
-  return a;
+    if (a < b) {
+        a = b;
+    }
+    return a;
 }
 
 inline int64_t div_floor(int64_t a, int64_t b) {
-  if (b < 0) {
-    a *= -1;
-    b *= -1;
-  }
-  if (a < 0) {
-    return (a + 1) / b - 1;
-  } else {
-    return a / b;
-  }
+    if (b < 0) {
+        a *= -1;
+        b *= -1;
+    }
+    if (a < 0) {
+        return (a + 1) / b - 1;
+    } else {
+        return a / b;
+    }
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+    return div_floor(a + b - 1, b);
 }
 
 int main() {
+    i32 H, W;
+    cin >> H >> W;
+    vector<string> area(H);
+    rep(i, H) {
+        cin >> area[i];
+    }
 
+    i32 N = min(H, W);
+    vector<i32> count(N + 1, 0);
+    rep(i, H) {
+        rep(j, W) {
+            if (area[i][j] == '#') {
+                i32 current_size = 0;
+                rep1(d, N) {
+                    bool flag = true;
+                    for (i32 mul = 4; mul < 8; ++mul) {
+                        i32 nx = j + dx[mul] * d, ny = i + dy[mul] * d;
+                        if (!(0 <= ny && ny < H && 0 <= nx && nx < W && area[ny][nx] == '#')) {
+                            flag = false;
+                        }
+                        nx = j + (d + 1) * dx[mul], ny = i + (d + 1) * dy[mul];
+                        if (0 <= ny && ny < H && 0 <= nx && nx < W && area[ny][nx] != '.') {
+                            flag = false;
+                        }
+                    }
+                    if (flag)
+                        current_size = d;
+                }
+                count[current_size]++;
+            }
+        }
+    }
+    rep1(i, N) {
+        cout << count[i] << (i == N ? '\n' : ' ');
+    }
 }
