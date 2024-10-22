@@ -63,16 +63,14 @@ int main() {
                     bool flag = true;
                     for (i32 mul = 4; mul < 8; ++mul) {
                         i32 nx = j + dx[mul] * d, ny = i + dy[mul] * d;
-                        if (!(0 <= ny && ny < H && 0 <= nx && nx < W && area[ny][nx] == '#')) {
-                            flag = false;
-                        }
-                        nx = j + (d + 1) * dx[mul], ny = i + (d + 1) * dy[mul];
-                        if (0 <= ny && ny < H && 0 <= nx && nx < W && area[ny][nx] != '.') {
+                        if (!((0 <= ny && ny < H && 0 <= nx && nx < W) && area[ny][nx] == '#')) {
                             flag = false;
                         }
                     }
                     if (flag)
                         current_size = d;
+                    else
+                        break;
                 }
                 count[current_size]++;
             }

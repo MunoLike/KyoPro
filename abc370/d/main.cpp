@@ -63,4 +63,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    double A, B;
+    cin >> A >> B;
+    cout << setprecision(15) << (A - B) / 3.0 + B << endl;
 }

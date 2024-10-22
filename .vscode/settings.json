@@ -108,5 +108,6 @@
         "editor.formatOnPaste": true,
         "editor.formatOnType": true,
     },
-    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google ,ColumnLimit: 0, IndentWidth: 4, TabWidth: 4 }"
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google ,ColumnLimit: 0, IndentWidth: 4, TabWidth: 4 }",
+    "terminal.integrated.cwd": "${fileDirname}"
 }

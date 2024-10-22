@@ -63,4 +63,23 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+    vector<vector<i32>> a(n + 1, vector<i32>(3));
+
+    rep1(i, n) rep(j, 3) cin >> a[i][j];
+
+    vector<vector<i32>> dp(n + 1, vector<i32>(3));
+
+    rep1(i, n) {
+        rep(j, 3) {
+            rep(k, 3) {
+                if (j == k) continue;
+                dp[i][j] = max(dp[i - 1][k] + a[i][j], dp[i][j]);
+            }
+        }
+    }
+
+    cout << *max_element(all(dp[n])) << endl;
 }

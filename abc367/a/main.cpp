@@ -58,13 +58,14 @@ int main() {
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    i32 A, B, C;
-    cin >> A >> B >> C;
+    i32 a, b, c;
+    cin >> a >> b >> c;
+    c = prevent_oor(c - b, 24);
+    a = prevent_oor(a - b, 24);
 
-    A = prevent_oor(A - B, 24);
-    C = prevent_oor(C - B, 24);
-    if (A < C)
-        cout << "No\n";
-    else
+    if (c <= a) {
         cout << "Yes\n";
+    } else {
+        cout << "No\n";
+    }
 }

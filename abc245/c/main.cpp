@@ -7,6 +7,7 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
 #define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
@@ -44,19 +45,26 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
-bool dfs(vector<i64> &A, vector<i64> &B, i64 cur, i64 N) {
-    if (cur == N) {
-        return true;
-    }
-    if (A[cur])
-}
-
 int main() {
     i32 N;
     i64 K;
+    cin >> N >> K;
     vector<i64> A(N), B(N);
     rep(i, N) cin >> A[i];
     rep(i, N) cin >> B[i];
 
-    cout << (dfs(A, B, 0, N) ? "Yes" : "No") << endl;
+    vector<bool> dpA(N), dpB(N);
+    dpA[0] = dpB[0] = true;
+    rep1(j, N - 1) {
+        if (dpA[j - 1]) {
+            if (abs(A[j - 1] - A[j]) <= K) dpA[j] = true;
+            if (abs(A[j - 1] - B[j]) <= K) dpB[j] = true;
+        }
+        if (dpB[j - 1]) {
+            if (abs(B[j - 1] - A[j]) <= K) dpA[j] = true;
+            if (abs(B[j - 1] - B[j]) <= K) dpB[j] = true;
+        }
+    }
+
+    cout << (dpA[N - 1] | dpB[N - 1] ? "Yes" : "No") << endl;
 }

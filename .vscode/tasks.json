@@ -33,9 +33,7 @@
             "command": "oj",
             "args": [
                 "t",
-                "--ignore-spaces",
-                "-d",
-                "./tests"
+                "--ignore-spaces"
             ],
             "dependsOn": [
                 "c++ build for AtCoder"
@@ -51,13 +49,18 @@
             "command": "acc",
             "args": [
                 "submit",
-                "${fileBasename}"
+                "${fileBasename}",
+                "--",
+                "-y"
             ],
             "dependsOn": [
                 "c++ build for AtCoder",
                 "oj t",
             ],
-            "group": "test"
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
         }
     ]
 }
