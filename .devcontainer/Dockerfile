@@ -15,3 +15,6 @@ RUN apt update &&\
 
 RUN pip3 install --break-system-packages online-judge-tools &&\
     npm install -g atcoder-cli
+
+RUN cd cd /usr/include/x86_64-linux-gnu/c++/13/bits/ &&\
+    g++-13 -std=c++2b -g -O0 -fsanitize=address,undefined -fno-omit-frame-pointer -Wall -Wextra stdc++.h

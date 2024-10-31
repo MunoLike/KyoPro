@@ -9,6 +9,7 @@
             },
             "command": "g++-13",
             "args": [
+                "-H",
                 "-I",
                 "${workspaceFolder}/ac-library/",
                 "-std=c++2b",
@@ -57,10 +58,7 @@
                 "c++ build for AtCoder",
                 "oj t",
             ],
-            "group": {
-                "kind": "test",
-                "isDefault": true
-            }
+            "group": "test"
         }
     ]
 }

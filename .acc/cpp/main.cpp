@@ -6,6 +6,10 @@ using i32 = int32_t;
 using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
+using vi32 = vector<i32>;
+using vi64 = vector<i64>;
+using vvi32 = vector<vector<i32>>;
+using vvi64 = vector<vector<i64>>;
 #define rep(i, n) for (i32 i = 0; i < (n); i++)
 #define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
 #define all(a) (a).begin(), (a).end()
@@ -60,7 +64,4 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
 }

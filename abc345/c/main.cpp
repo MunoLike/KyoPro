@@ -48,12 +48,20 @@ int main() {
     string S;
     cin >> S;
 
-    set<char> char_contain(all(S));
-
-    if (char_contain.size() == 1) {
-        cout << 1 << endl;
-        return 0;
+    vector<i32> kind(26);
+    i32 n = S.size();
+    rep(i, n) {
+        ++kind[S[i] - 'a'];
     }
 
-    cout << char_contain.size() * (char_contain.size() - 1) / 2 << endl;
+    i64 cnt = 0;
+    bool flag = false;
+    rep(j, 26) {
+        if (kind[j] >= 2) flag = true;
+        for (i32 k = j + 1; k < 26; ++k) {
+            if (j == k) continue;
+            cnt += kind[j] * kind[k];
+        }
+    }
+    cout << (flag ? cnt + 1 : cnt) << endl;
 }

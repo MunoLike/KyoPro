@@ -54,21 +54,6 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N, M, A, B;
-    cin >> N >> M;
-    vector<vector<i32>> edge(N);
-    rep(i, M) {
-        cin >> A >> B;
-        --A, --B;
-        edge[A].emplace_back(B);
-        edge[B].emplace_back(A);
-    }
-
-    for (auto v : edge) {
-        cout << "{";
-        for (auto val : v) {
-            cout << val << ", ";
-        }
-        cout << "}\n";
-    }
+    vector<i32> ab{1};
+    cout << lower_bound(all(ab), 9) - ab.begin() << endl;
 }

@@ -12,7 +12,7 @@
             "program": "${fileDirname}/a.out",
             "args": [
                 "<",
-                "${fileDirname}/test/sample-2.in"
+                "${fileDirname}/test/sample-1.in"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

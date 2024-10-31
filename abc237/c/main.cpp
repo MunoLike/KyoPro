@@ -46,22 +46,29 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 n;
     string s;
-    cin >> n >> s;
-    deque<i32> a;
-    a.push_back(0);
+    cin >> s;
 
-    rep1(i, n) {
-        if (s[i - 1] == 'L') {
-            a.push_front(i);
-        } else {
-            a.push_back(i);
+    i32 n = s.size();
+
+    i32 l_a = 0, r_a = n - 1;
+    while (l_a < n and s[l_a] == 'a') ++l_a;
+    while (r_a >= 0 and s[r_a] == 'a') --r_a;
+
+    r_a = n - 1 - r_a;
+    if (l_a > r_a) {
+        cout << "No\n";
+    } else {
+        i32 diff = r_a - l_a;
+        string as(diff, 'a');
+        as += s;
+        i32 n = as.size();
+        bool flag = true;
+        for (i32 i = 0; i < n / 2; ++i) {
+            if (as[i] != as[n - i - 1]) {
+                flag = false;
+            }
         }
+        cout << (flag ? "Yes" : "No") << endl;
     }
-
-    for (char &&x : a) {
-        cout << x << ' ';
-    }
-    cout << endl;
 }

@@ -71,26 +71,33 @@ int main() {
     rep(i, n - 1) cin >> b[i];
 
     sort(all(a));
-    sort(all(b));
 
-    vector<bool> used(n - 1);
-    i32 mx = *max_element(all(a));
+    const i32 inf = INT32_MAX / 2;
+    i32 ok = inf, ng = 0;
 
-    i32 idx = n - 2;
-    i32 above = 0, cnt = 0;
-    for (i32 i = n - 1; i >= 0; --i) {
-        if (a[i] <= b[idx]) {
-            --idx;  // 使用した
+    auto judge = [&](i32 val) {
+        auto new_b = b;
+        new_b.push_back(val);
+        sort(all(new_b));
+        rep(i, n) {
+            if (a[i] > new_b[i]) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    while (ok - ng > 1) {
+        i32 w = (ok + ng) / 2;
+        if (judge(w)) {
+            ok = w;
         } else {
-            above = a[i];
-            ++cnt;
+            ng = w;
         }
     }
 
-    if (idx == -1)
-        cout << b[0] << endl;
-    else if (cnt >= 2)
+    if (ok == inf)
         cout << -1 << endl;
     else
-        cout << cnt << endl;
+        cout << ok << endl;
 }

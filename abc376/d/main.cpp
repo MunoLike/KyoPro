@@ -63,4 +63,39 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n, m;
+    cin >> n >> m;
+    vector<vector<i32>> edge(n);
+
+    rep(i, m) {
+        i32 a, b;
+        cin >> a >> b;
+        --a, --b;
+        edge[a].emplace_back(b);
+    }
+
+    vector<i32> visited(n, -1);
+
+    queue<i32> q;
+    q.emplace(0);
+    visited[0] = 0;
+
+    while (!q.empty()) {
+        i32 pos = q.front();
+        q.pop();
+
+        for (i32 v : edge[pos]) {
+            if (v == 0) {
+                cout << visited[pos] + 1 << endl;
+                return 0;
+            }
+            if (visited[v] == -1) {
+                q.emplace(v);
+                visited[v] = visited[pos] + 1;
+            }
+        }
+    }
+
+    cout << -1 << endl;
 }
