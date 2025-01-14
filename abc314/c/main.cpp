@@ -45,25 +45,45 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N, M;
-    cin >> N >> M;
-    string S;
-    cin >> S;
+    i32 n, q;
+    string s;
+    cin >> n >> s >> q;
 
-    vector<vector<i32>> color_map(M);
-    rep(i, N) {
-        i32 color;
-        cin >> color;
-        --color;
-        color_map[color].emplace_back(i);
+    vector<pair<i32, char>> status(n);  // 更新時刻, 文字
+    rep(i, n) {
+        status[i].second = s[i];
     }
 
-    string out(N, 'o');
-    rep(i, M) {
-        rep(j, color_map[i].size()) {
-            i32 next = color_map[i][(j + 1) % color_map[i].size()];
-            out[next] = S[color_map[i][j]];
+    pair<i32, i32> last_full_modify = {-1, 0};  // 更新時刻, 更新種別
+    rep(i, q) {
+        i32 t, x, c;
+        cin >> t;
+        switch (t) {
+            case 1:
+                cin >> x >> c;
+                status[x - 1].first = i;
+                status[x - 1].second = c;
+                break;
+            case 2:
+                last_full_modify.first = i;
+                last_full_modify.second = 2;
+                break;
+            case 3:
+                last_full_modify.first = i;
+                last_full_modify.second = 3;
+                break;
+            default:
+                break;
         }
     }
-    cout << out << '\n';
+
+    rep(i, n) {
+        if (last_full_modify.first == -1 or last_full_modify.first < status[i].first) {
+            cout << status[i].second;
+        } else if (last_full_modify.second == 2) {
+            cout << tolower(status[i].second);
+        } else {
+            cout << toupper(status[i].second);
+        }
+    }
 }

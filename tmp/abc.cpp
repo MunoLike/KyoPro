@@ -1,59 +1,32 @@
-#include <bits/stdc++.h>
+#include <array>
+#include <cstddef>
+#include <iostream>
 
-#include <atcoder/all>
-using namespace std;
-using i32 = int32_t;
-using i64 = int64_t;
-using u32 = uint32_t;
-using u64 = uint64_t;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
-#define all(a) (a).begin(), (a).end()
-const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
-const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
+constexpr std::size_t MAX_SIZE = 400;  // 配列のサイズ
 
-template <class S, class T>
-inline S prevent_oor(S a, const T b) {
-    a %= b;
-    if (a < 0) {
-        a += b;
+// 素数判定用の関数
+constexpr bool is_prime(std::size_t n) {
+    if (n < 2) return false;
+    for (std::size_t i = 2; i * i <= n; ++i) {
+        if (n % i == 0) return false;
     }
-    return a;
+    return true;
 }
 
-template <class S, class T>
-inline S chmax(S &a, T b) {
-    if (a < b) {
-        a = b;
+// 素数配列を作成する関数
+constexpr auto generate_prime_array() {
+    std::array<bool, MAX_SIZE> primes = {};
+    for (std::size_t i = 0; i < MAX_SIZE; ++i) {
+        primes[i] = is_prime(i);
     }
-    return a;
+    return primes;
 }
 
-template <class S, class T>
-inline S chmin(S &a, T b) {
-    if (a > b) {
-        a = b;
-    }
-    return a;
-}
-
-inline int64_t div_floor(int64_t a, int64_t b) {
-    if (b < 0) {
-        a *= -1;
-        b *= -1;
-    }
-    if (a < 0) {
-        return (a + 1) / b - 1;
-    } else {
-        return a / b;
-    }
-}
-
-inline int64_t div_ceil(int64_t a, int64_t b) {
-    return div_floor(a + b - 1, b);
-}
+constexpr auto prime_array = generate_prime_array();
 
 int main() {
-    vector<i32> ab{1};
-    cout << lower_bound(all(ab), 9) - ab.begin() << endl;
+    for (std::size_t i = 0; i < MAX_SIZE; ++i) {
+        std::cout << "Index " << i << ": " << (prime_array[i] ? "Prime" : "Not Prime") << '\n';
+    }
+    return 0;
 }

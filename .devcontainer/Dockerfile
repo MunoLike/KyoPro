@@ -9,12 +9,11 @@ RUN apt update &&\
     build-essential\
     gdb\
     software-properties-common &&\
-    add-apt-repository ppa:ubuntu-toolchain-r/test &&\
     apt update &&\
-    apt install -y g++-13
+    apt install -y g++
 
 RUN pip3 install --break-system-packages online-judge-tools &&\
     npm install -g atcoder-cli
 
-RUN cd cd /usr/include/x86_64-linux-gnu/c++/13/bits/ &&\
-    g++-13 -std=c++2b -g -O0 -fsanitize=address,undefined -fno-omit-frame-pointer -Wall -Wextra stdc++.h
+RUN cd /usr/include/x86_64-linux-gnu/c++/13/bits/ &&\
+    g++ -std=c++2b -g -O0 -fsanitize=address,undefined -fno-omit-frame-pointer -Wall -Wextra stdc++.h

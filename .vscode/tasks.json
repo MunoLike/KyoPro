@@ -7,9 +7,9 @@
             "options": {
                 "cwd": "${fileDirname}"
             },
-            "command": "g++-13",
+            "command": "time",
             "args": [
-                "-H",
+                "g++-13",
                 "-I",
                 "${workspaceFolder}/ac-library/",
                 "-std=c++2b",

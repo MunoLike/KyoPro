@@ -54,21 +54,30 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-
-    i32 n;
-    cin >> n;
-    vector<i32> a(n);
+    i64 n, t;
+    cin >> n >> t;
+    string s;
+    cin >> s;
+    vector<i64> x(n), forw, rev;
     rep(i, n) {
-        cin >> a[i];
+        i64 x;
+        cin >> x;
+        if (s[i] == '1')
+            forw.emplace_back(x);
+        else
+            rev.emplace_back(x);
     }
 
-    i32 mx = a[0];
-    i64 sum = 0;
-    rep(i, n) {
-        if (mx < a[i]) mx = a[i];
-        sum += mx - a[i];
+    sort(all(rev));
+    sort(all(forw));
+
+    i64 cnt = 0;
+
+    rep(i, rev.size()) {
+        i32 l = lower_bound(all(forw), rev[i] - t * 2) - forw.begin();
+        i32 r = lower_bound(all(forw), rev[i]) - forw.begin();
+        cnt += r - l;
     }
-    cout << sum << endl;
+
+    cout << cnt << '\n';
 }

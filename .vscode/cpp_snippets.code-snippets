@@ -1,0 +1,76 @@
+{
+	// Place your workspace workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"vvi32": {
+		"scope": "cpp",
+		"prefix": "vvi32",
+		"body": "vector<vector<i32>> $1",
+		"description": "create a vvi32 vector."
+	},
+	"vvi64": {
+		"scope": "cpp",
+		"prefix": "vvi64",
+		"body": "vector<vector<i64>> $1",
+		"description": "create a vvi64 vector."
+	},
+	"vvb": {
+		"scope": "cpp",
+		"prefix": "vvb",
+		"body": "vector<vector<bool>> $1",
+		"description": "create a vvb vector."
+	},
+	"vi32": {
+		"scope": "cpp",
+		"prefix": "vi32",
+		"body": "vector<i32> $1",
+		"description": "create a vi32 vector."
+	},
+	"vi64": {
+		"scope": "cpp",
+		"prefix": "vi64",
+		"body": "vector<i64> $1",
+		"description": "create a vi64 vector."
+	},
+	"vb": {
+		"scope": "cpp",
+		"prefix": "vb",
+		"body": "vector<bool> $1",
+		"description": "create a vb vector."
+	},
+	"lrud": {
+		"scope": "cpp",
+		"prefix": "lrud",
+		"body": [
+			"switch ($1) {",
+			"\tcase 'L':",
+			"\t\tbreak;",
+			"\tcase 'R':",
+			"\t\tbreak;",
+			"\tcase 'U':",
+			"\t\tbreak;",
+			"\tcase 'D':",
+			"\t\tbreak;",
+			"}"
+		]
+	},
+	"yn": {
+		"scope": "cpp",
+		"prefix": "yn",
+		"body": "($1 ? \"Yes\":\"No\")",
+		"description": "create yn output."
+	}
+}

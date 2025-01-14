@@ -25,7 +25,7 @@ inline S prevent_oor(S a, const T b) {
 }
 
 template <class S, class T>
-inline S chmax(S &a, T b) {
+inline S chmax(S& a, T b) {
     if (a < b) {
         a = b;
     }
@@ -49,35 +49,32 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 h1, w1, h2, w2;
-    cin >> h1 >> w1;
-    vvi32 a1(h1, vi32(w1));
-    rep(i, h1) rep(j, w1) cin >> a1[i][j];
-    cin >> h2 >> w2;
-    vvi32 a2(h2, vi32(w2));
-    rep(i, h2) rep(j, w2) cin >> a2[i][j];
+    string s;
+    cin >> s;
+    string base = "atcoder";
 
-    for (u32 h = 0; h < (1U << h1); ++h) {
-        for (u32 w = 0; w < (1U << w1); ++w) {
-            if (popcount(h) == h2 and popcount(w) == w2) {
-                bool flag = true;
-                u32 k = 0;
-                rep(i, h1) {
-                    rep(j, w1) {
-                        if (h & (1U << i) and w & (1U << j)) {
-                            // cout << "a1[" << i << "][" << j << "] a2[" << k / w2 << "][" << k % w2 << "]" << endl;
-                            if (a1[i][j] != a2[k / w2][k % w2]) flag = false;
-                            ++k;
-                        }
-                    }
-                }
-                if (flag) {
-                    cout << "Yes\n";
-                    return 0;
-                }
+    queue<string> q;
+    map<string, i32> mp;
+
+    mp[s] = 0;
+    q.push(s);
+
+    while (!q.empty()) {
+        string& f = q.front();
+        q.pop();
+
+        if (f == "atcoder") {
+            cout << mp[f] << '\n';
+            return 0;
+        }
+
+        for (i32 i = 1; i < 7; ++i) {
+            string nx = f;
+            swap(nx[i - 1], nx[i]);
+            if (!mp.contains(nx)) {
+                q.push(nx);
+                mp[nx] = mp[f] + 1;
             }
         }
     }
-
-    cout << "No\n";
 }

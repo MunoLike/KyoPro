@@ -50,32 +50,23 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 H, W;
-    cin >> H >> W;
-    vector<string> area(H);
-    rep(i, H) cin >> area[i];
+    i32 h1, h2, h3, w1, w2, w3;
+    cin >> h1 >> h2 >> h3 >> w1 >> w2 >> w3;
 
-    vector<vector<bool>> visited(H, vector<bool>(W));
-    queue<pair<i32, i32>> Q;
-    Q.emplace(0, 0);
-    visited[0][0] = true;
-    while (!Q.empty()) {
-        auto [y, x] = Q.front();
-        Q.pop();
-        rep(i, 4) {
-            i32 ny = y + dy[i], nx = x + dx[i];
-            if (isin(ny, 0, H) && isin(nx, 0, W) && visited[ny][nx]) {
-                Q.emplace(ny, nx);
-                visited[ny][nx] = true;
+    i32 ans = 0;
+    for (i32 a = 1; a <= 28; ++a) {
+        for (i32 b = 1; b <= 28; ++b) {
+            for (i32 d = 1; d <= 28; ++d) {
+                for (i32 e = 1; e <= 28; ++e) {
+                    i32 c = h1 - a - b;
+                    i32 f = h2 - d - e;
+                    i32 g = w1 - a - d;
+                    i32 h = w2 - b - e;
+                    i32 i = w3 - c - f;
+                    if (min({c, f, g, h, i}) > 0 and g + h + i == h3) ++ans;
+                }
             }
         }
     }
-
-    i32 sum = 0;
-    rep(i, H) {
-        rep(j, W) {
-            sum += visited[i][j];
-        }
-    }
-    cout << sum << endl;
+    cout << ans << endl;
 }

@@ -28,6 +28,14 @@ inline S chmax(S &a, T b) {
     return a;
 }
 
+template <class S, class T>
+inline S chmin(S &a, T b) {
+    if (a > b) {
+        a = b;
+    }
+    return a;
+}
+
 inline int64_t div_floor(int64_t a, int64_t b) {
     if (b < 0) {
         a *= -1;
@@ -45,19 +53,22 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N;
-    string S;
-    cin >> N >> S;
-    vector<i32> len(26, 0);
-    for (i32 i = 0; i < S.size();) {
-        char c = S[i];
-        i32 j = i;
-        while (j < S.size() && S[i] == S[j]) ++j;
-        chmax(len[c - 'a'], j - i);
-        i = j;
+    i32 n, m;
+    cin >> n >> m;
+    vector<i64> vote(m), cnt(m + 1);
+    rep(i, m) cin >> vote[i];
+
+    i64 mxidx = 0;
+
+    rep(i, m) {
+        ++cnt[vote[i]];
+        if (cnt[mxidx] < cnt[vote[i]]) {
+            mxidx = vote[i];
+        }
+        if (cnt[mxidx] == cnt[vote[i]]) {
+            chmin(mxidx, vote[i]);
+        }
+
+        cout << mxidx << '\n';
     }
-
-    i32 ans = reduce(all(len));
-
-    cout << ans << endl;
 }
