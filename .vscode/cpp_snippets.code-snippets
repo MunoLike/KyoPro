@@ -51,6 +51,12 @@
 		"body": "vector<bool> $1",
 		"description": "create a vb vector."
 	},
+	"vs": {
+		"scope": "cpp",
+		"prefix": "vs",
+		"body": "vector<string> $1",
+		"description": "create a vs vector."
+	},
 	"lrud": {
 		"scope": "cpp",
 		"prefix": "lrud",
