@@ -61,5 +61,28 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
+// priority queue, o(n), imos
+
 int main() {
+    i32 n;
+    cin >> n;
+    vector<i32> a(n);
+    rep(i, n) {
+        cin >> a[i];
+    }
+
+    i32 s = 0;
+    vector<i32> r(n);
+
+    rep(i, n) {
+        a[i] += s;
+        ++s;
+        i32 num = min(a[i], n - i - 1);  // min(残りの数, 残りの人数)
+        a[i] -= num;
+        r[i + num]++;
+        s -= r[i];
+    }
+
+    rep(i, n) cout << a[i] << "\n "[i < n - 1];
+    cout << endl;
 }
