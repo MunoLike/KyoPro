@@ -1,0 +1,64 @@
+{
+  "contest": {
+    "id": "adt_medium_20250123_3",
+    "title": "AtCoder Daily Training MEDIUM 2025/01/23 20:30start",
+    "url": "https://atcoder.jp/contests/adt_medium_20250123_3"
+  },
+  "tasks": [
+    {
+      "id": "abc337_b",
+      "label": "C",
+      "title": "Extended ABC",
+      "url": "https://atcoder.jp/contests/adt_medium_20250123_3/tasks/abc337_b",
+      "directory": {
+        "path": "c",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
+    },
+    {
+      "id": "abc284_b",
+      "label": "D",
+      "title": "Multi Test Cases",
+      "url": "https://atcoder.jp/contests/adt_medium_20250123_3/tasks/abc284_b",
+      "directory": {
+        "path": "d",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
+    },
+    {
+      "id": "abc227_c",
+      "label": "E",
+      "title": "ABC conjecture",
+      "url": "https://atcoder.jp/contests/adt_medium_20250123_3/tasks/abc227_c",
+      "directory": {
+        "path": "e",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
+    },
+    {
+      "id": "abc374_c",
+      "label": "F",
+      "title": "Separated Lunch",
+      "url": "https://atcoder.jp/contests/adt_medium_20250123_3/tasks/abc374_c",
+      "directory": {
+        "path": "f",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
+    },
+    {
+      "id": "abc299_d",
+      "label": "G",
+      "title": "Find by Query",
+      "url": "https://atcoder.jp/contests/adt_medium_20250123_3/tasks/abc299_d",
+      "directory": {
+        "path": "g",
+        "testdir": "test",
+        "submit": "main.cpp"
+      }
+    }
+  ]
+}

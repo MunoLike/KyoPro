@@ -1,6 +1,8 @@
 #include <array>
 #include <cstddef>
 #include <iostream>
+#include <vector>
+using namespace std;
 
 constexpr std::size_t MAX_SIZE = 400;  // 配列のサイズ
 
@@ -25,8 +27,6 @@ constexpr auto generate_prime_array() {
 constexpr auto prime_array = generate_prime_array();
 
 int main() {
-    for (std::size_t i = 0; i < MAX_SIZE; ++i) {
-        std::cout << "Index " << i << ": " << (prime_array[i] ? "Prime" : "Not Prime") << '\n';
-    }
-    return 0;
+    vector<int> a;
+    cout << a.back() << endl;
 }
