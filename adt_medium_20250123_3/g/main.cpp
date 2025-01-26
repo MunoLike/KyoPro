@@ -62,4 +62,20 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i32 n;
+    cin >> n;
+    i64 zero = 1, one = n;
+
+    while (abs(one - zero) > 1) {
+        i64 mid = (zero + one) / 2;
+        cout << "? " << mid << '\n';
+        i64 ret;
+        cin >> ret;
+        if (ret) {
+            one = mid;
+        } else {
+            zero = mid;
+        }
+    }
+    cout << "! " << zero << '\n';
 }

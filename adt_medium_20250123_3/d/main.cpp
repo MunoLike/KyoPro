@@ -62,4 +62,17 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i32 t;
+    cin >> t;
+    rep(i, t) {
+        i32 n;
+        cin >> n;
+        i32 cnt = 0;
+        rep(j, n) {
+            i32 in;
+            cin >> in;
+            cnt += in % 2;
+        }
+        cout << cnt << '\n';
+    }
 }

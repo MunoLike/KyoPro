@@ -62,11 +62,34 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    string s;
-    cin >> s;
-    if (regex_match(s, regex("A*B*C*"))) {
-        cout << "Yes\n";
-    } else {
-        cout << "No\n";
+    i32 n, x;
+    cin >> n >> x;
+    vector<pair<i64, i64>> v1, v2, v3;
+    rep(i, n) {
+        i64 v, a_in, c_in;
+        cin >> v >> a_in >> c_in;
+        switch (v) {
+            case 1:
+                v1.emplace_back(a_in, c_in);
+                break;
+            case 2:
+                v2.emplace_back(a_in, c_in);
+                break;
+            case 3:
+                v3.emplace_back(a_in, c_in);
+                break;
+            default:
+                break;
+        }
+    }
+
+    auto f = [](pair<i64, i64> &lhs, pair<i64, i64> &rhs) {
+        return lhs.first * rhs.second > rhs.first * lhs.second;
+    };
+
+    rep(i, 3) {
+        sort(all(a[i], [](auto lhs, auto rhs) {
+            return lhs
+        }));
     }
 }

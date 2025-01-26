@@ -62,4 +62,21 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i32 n;
+    cin >> n;
+    vector<i64> k(n);
+    rep(i, n) cin >> k[i];
+
+    i64 mi = 1e15, allm = reduce(all(k));
+    for (i32 s = 0b1; s < 1 << n; ++s) {
+        i64 sum = 0;
+        rep(i, n) {
+            if (s & (1 << i)) {
+                sum += k[i];
+            }
+        }
+        chmax(sum, allm - sum);
+        chmin(mi, sum);
+    }
+    cout << mi << endl;
 }

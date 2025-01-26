@@ -62,11 +62,17 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    string s;
-    cin >> s;
-    if (regex_match(s, regex("A*B*C*"))) {
-        cout << "Yes\n";
-    } else {
-        cout << "No\n";
+    vector<i32> a(5);
+    rep(i, 5) cin >> a[i];
+
+    i32 cnt = 0;
+    rep(i, 5) {
+        for (i32 j = 4; i < j; --j) {
+            if (a[j] < a[j - 1]) {
+                swap(a[j], a[j - 1]);
+                ++cnt;
+            }
+        }
     }
+    cout << (cnt == 1 ? "Yes\n" : "No\n");
 }

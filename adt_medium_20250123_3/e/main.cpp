@@ -62,4 +62,15 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i64 n;
+    cin >> n;
+
+    i64 ans = 0;
+    for (i64 a = 1; a * a * a <= n; ++a) {
+        for (i64 b = a; a * b * b <= n; ++b) {
+            i64 c = n / a / b;
+            ans += c - b + 1;
+        }
+    }
+    cout << ans << endl;
 }

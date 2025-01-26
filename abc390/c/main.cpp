@@ -62,11 +62,32 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    string s;
-    cin >> s;
-    if (regex_match(s, regex("A*B*C*"))) {
-        cout << "Yes\n";
-    } else {
-        cout << "No\n";
+    i32 h, w;
+    cin >> h >> w;
+    vector<string> s(h);
+    rep(i, h) cin >> s[i];
+
+    vector<pair<i32, i32>> black;
+    rep(i, h) rep(j, w) {
+        if (s[i][j] == '#') black.emplace_back(i, j);  // 一番左上が先頭のはず
     }
+
+    i32 sx = 9999, sy = 9999, gx = 0, gy = 0;
+    rep(i, black.size()) {
+        auto [mx, my] = black[i];
+        chmin(sx, mx);
+        chmin(sy, my);
+        chmax(gx, mx);
+        chmax(gy, my);
+    }
+
+    for (i32 x = sx; x <= gx; ++x) {
+        for (i32 y = sy; y <= gy; ++y) {
+            if (s[x][y] == '.') {
+                cout << "No\n";
+                return 0;
+            }
+        }
+    }
+    cout << "Yes\n";
 }
