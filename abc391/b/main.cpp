@@ -62,5 +62,32 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    cout << div_floor(1, 4) << endl;
+    i32 n, m;
+    cin >> n >> m;
+    vector<string> as(n), at(m);
+    rep(i, n) cin >> as[i];
+    rep(i, m) cin >> at[i];
+
+    rep(i, n) {
+        rep(j, n) {
+            bool flag2 = true;  // 内ループで条件を満たしているか
+            rep(k, m) {
+                bool flag = true;  // 内ループで条件を満たしているか
+                rep(l, m) {
+                    i32 ni = i + k, nj = j + l;
+                    if (!(is_in(0, ni, n) and is_in(0, nj, n) and as[ni][nj] == at[k][l])) {
+                        flag = false;
+                    }
+                }
+                if (!flag) {
+                    flag2 = false;
+                    break;
+                }
+            }
+            if (flag2) {
+                cout << i + 1 << " " << j + 1 << endl;
+                return 0;
+            }
+        }
+    }
 }
