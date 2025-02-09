@@ -52,6 +52,7 @@ inline bool is_in(const T lower, S a, const T upper) {
 int main() {
     i32 n;
     string s;
+
     cin >> n >> s;
 
     vector<string> st;
@@ -60,17 +61,16 @@ int main() {
         if (s[i] == '(') {
             st.emplace_back("(");
         } else if (s[i] == ')') {
-            if (st.size() == 1)
-                st.back() += ")";
-            else
+            if (st.size() == 1) {
+                st.back() += ')';
+            } else {
                 st.pop_back();
+            }
         } else {
             st.back() += s[i];
         }
     }
 
-    for (auto s : st) {
-        cout << s;
-    }
+    for (auto &str : st) cout << str;
     cout << endl;
 }

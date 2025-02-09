@@ -47,33 +47,33 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 int main() {
     i32 n;
     cin >> n;
-    vector<i64> a(n);
-    vector<pair<i64, i64>> s;  // 数, 個数
-    rep(i, n) cin >> a[i];
 
-    i64 cnt = 0;
+    stack<pair<i32, i32>> st;  // 数字、個数
 
-    for (i64 i = 0; i < n; ++i) {
-        i64 cur = a[i];
-        ++cnt;
-
-        if (s.empty()) {
-            s.emplace_back(cur, 1);
-        } else {
-            auto &[val, num] = s.back();
-
-            if (val == cur) {
-                if (num + 1 == cur) {
-                    cnt -= num+1;
-                    s.pop_back();
-                } else {
-                    ++num;
-                }
+    i64 sum = 0;
+    rep(i, n) {
+        i32 in;
+        cin >> in;
+        if (!st.empty()) {
+            auto &[val, num] = st.top();
+            if (val == in) {
+                ++num;
             } else {
-                s.emplace_back(cur, 1);
+                st.emplace(in, 1);
             }
+
+            ++sum;
+
+            auto &[val2, num2] = st.top();
+            if (val2 == num2) {
+                st.pop();
+                sum -= num2;
+            }
+        } else {
+            st.emplace(in, 1);
+            ++sum;
         }
 
-        cout << cnt << '\n';
+        cout << sum << endl;
     }
 }

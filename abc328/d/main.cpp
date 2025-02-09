@@ -45,13 +45,15 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    string s, ans;
+    string s;
     cin >> s;
 
-    i32 idx = 0;
-    for (char c : s) {
-        ans += c;
-        if (ans.size() >= 3 and ans.substr(ans.size() - 3) == "ABC") ans.erase(ans.end() - 3, ans.end());
+    string ans;
+    rep(i, s.size()) {
+        ans += s[i];
+        if (ans.size() >= 3 and ans.substr(ans.size() - 3) == "ABC") {
+            ans.erase(ans.end() - 3, ans.end());
+        }
     }
     cout << ans << endl;
 }
