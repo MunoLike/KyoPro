@@ -50,37 +50,27 @@ inline bool is_in(const T lower, S a, const T upper) {
 }
 
 int main() {
-    i32 h, w;
-    cin >> h >> w;
-    vector<string> area(h);
-    rep(i, h) cin >> area[i];
-    string pat = "snuke";
+    i32 n;
+    string s;
+    cin >> n >> s;
 
-    vector<vector<bool>> is_visited(h, vector<bool>(w));
-    stack<pair<i32, i32>> st;
-
-    st.emplace(0, 0);
-    is_visited[0][0] = true;
-    i64 cnt = 0;
-
-    while (!st.empty()) {
-        auto [cy, cx] = st.top();
-        st.pop();
-
-        rep(i, 4) {
-            i32 ny = cy + dy[i], nx = cx + dx[i];
-
-            % if (is_in(0, ny, h) and is_in(0, nx, w) and !is_visited[ny][nx] and (pat[cnt % pat.size()] == area[ny][nx])) {
-                if (ny == h - 1 and nx == w - 1) {
-                    cout << "Yes\n";
-                    return 0;
-                }
-
-                is_visited[ny][nx] = true;
-                st.emplace(ny, nx);
-            }
-            cnt = (cnt + 1) % 5;
+    vector<string> st;
+    st.emplace_back("");
+    rep(i, n) {
+        if (s[i] == '(') {
+            st.emplace_back("(");
+        } else if (s[i] == ')') {
+            if (st.size() == 1)
+                st.back() += ")";
+            else
+                st.pop_back();
+        } else {
+            st.back() += s[i];
         }
     }
-    cout << "No\n";
+
+    for (auto s : st) {
+        cout << s;
+    }
+    cout << endl;
 }
