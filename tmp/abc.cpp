@@ -62,5 +62,8 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    cout << div_floor(1, 4) << endl;
+    i64 num = 1;
+    i32 d = 50000;
+
+    cout << (double)num / d / d << endl;
 }

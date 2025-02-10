@@ -64,49 +64,35 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 int main() {
     i32 n;
     cin >> n;
-    vector<vector<i64>> dices(n);
+    vector<i32> dice_face_num(n);
 
-    vector<map<i32, i32>> dc_count(n);
+    const i32 fsize = 100000 + 10;
+    vector<vector<i32>> dc_count(n, vector<i32>(fsize));
 
     rep(i, n) {
-        i64 k;
+        i32 k;
         cin >> k;
+        dice_face_num[i] = k;
         rep(j, k) {
-            i64 a;
+            i32 a;
             cin >> a;
-            dices[i].emplace_back(a);
             ++dc_count[i][a];
         }
     }
 
-    vector<i32> selected(n);
-    selected[n - 1] = 2, selected[n - 2] = 1;
-
     double mx = 0;
 
-    do {
-        i32 mp1, mp2;
-        rep(i, n) {
-            if (selected[i] == 1) {
-                mp1 = i;
-            } else if (selected[i] == 2) {
-                mp2 = i;
+    for (i32 d1 = 0; d1 < n; ++d1) {
+        for (i32 d2 = d1 + 1; d2 < n; ++d2) {
+            i64 num = 0;
+            for (i32 f = 0; f < fsize; ++f) {
+                // i32同士の乗算の場合今回の問題の条件では安易にオーバーフローする
+                num += ((i64)dc_count[d1][f] * dc_count[d2][f]);
             }
+            // こちらも同様に(dice_face_num * dice_face_num)とかするとオーバーフローする
+            chmax(mx, (double)num / dice_face_num[d1] / dice_face_num[d2]);
         }
-
-        double probability = 0;
-        for (auto [key, val] : dc_count[mp1]) {
-            auto it = dc_count[mp2].find(key);
-            if (it != dc_count[mp2].end()) {
-                double probability_mul = 1;
-                probability_mul *= (double)val / dices[mp1].size();
-                probability_mul *= (double)(*it).second / dices[mp2].size();
-                probability += probability_mul;
-            }
-        }
-
-        chmax(mx, probability);
-    } while (next_permutation(all(selected)));
+    }
 
     printf("%.12f\n", mx);
 }
