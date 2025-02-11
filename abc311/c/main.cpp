@@ -45,29 +45,31 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N;
-    cin >> N;
+    i32 n;
+    cin >> n;
+    vector<i32> edge(n);
+    rep(i, n) {
+        cin >> edge[i];
+        --edge[i];
+    }
 
-    vector<i32> edges(N);
-    rep(i, N) cin >> edges[i], --edges[i];
-
-    vector<bool> visited(N);
-    i32 pos = 0;
-
-    while (!visited[pos]) {
-        visited[pos] = true;
-        pos = edges[pos];
+    vector<bool> is_visited(n);
+    i32 cur = 0;
+    while (!is_visited[cur]) {
+        is_visited[cur] = true;
+        cur = edge[cur];
     }
 
     vector<i32> history;
-    history.push_back(pos);
-    i32 cur = edges[pos];
+    i32 pos = cur;
+    cur = edge[cur];
+    history.emplace_back(cur);
     while (pos != cur) {
-        history.push_back(cur);
-        cur = edges[cur];
+        cur = edge[cur];
+        history.emplace_back(cur);
     }
 
-    cout << history.size() << endl;
-    for (auto val : history) cout << val + 1 << ' ';
+    cout << history.size() << '\n';
+    for (auto x : history) cout << x + 1 << ' ';
     cout << endl;
 }
