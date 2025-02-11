@@ -54,46 +54,49 @@ void dfs(i32 idx, vector<vector<i32>> &edges, vector<i32> &length) {
 }
 
 int main() {
-    i32 N, M;
-    cin >> N >> M;
-    vector<vector<i32>> edges(N);
-    rep(i, M) {
-        i32 u, v;
-        cin >> u >> v;
-        --u, --v;
-        edges[u].emplace_back(v);
-        edges[v].emplace_back(u);
+    i32 n, m;
+    cin >> n >> m;
+    vector<vector<i32>> edge(n);
+    rep(i, m) {
+        i32 from, to;
+        cin >> from >> to;
+        --from, --to;
+        edge[from].emplace_back(to);
+        edge[to].emplace_back(from);
     }
 
-    if (M != N - 1) {
+    if (n - 1 != m) {
         cout << "No\n";
-        return 0;
-    }
+    } else {
+        vector<bool> is_visited(n);
+        queue<i32> q;
+        q.emplace(0);
+        is_visited[0] = true;
 
-    rep(i, N) {
-        if (edges[i].size() > 2) {
-            cout << "No\n";
-            return 0;
-        }
-    }
-
-    queue<i32> Q;
-    vector<bool> visited(N);
-
-    Q.push(0);
-    visited[0] = true;
-    while (!Q.empty()) {
-        i32 fr = Q.front();
-        Q.pop();
-        for (i32 &e : edges[fr]) {
-            if (!visited[e]) {
-                Q.push(e);
-                visited[e] = true;
+        bool flag_ord = true;
+        while (!q.empty()) {
+            i32 t = q.front();
+            q.pop();
+            i32 cnt = 0;
+            for (auto v : edge[t]) {
+                if (!is_visited[v]) {
+                    is_visited[v] = true;
+                    q.emplace(v);
+                    ++cnt;
+                }
             }
+            if (cnt > 2) flag_ord = false;
+        }
+
+        bool flag_all = true;
+        rep(i, n) {
+            flag_all &= is_visited[i];
+        }
+
+        if (flag_all and flag_ord) {
+            cout << "Yes\n";
+        } else {
+            cout << "No\n";
         }
     }
-
-    bool flag = true;
-    for (auto val : visited) flag &= val;
-    cout << (flag ? "Yes\n" : "No\n");
 }

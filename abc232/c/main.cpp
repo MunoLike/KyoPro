@@ -64,4 +64,38 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 int main() {
     i32 n, m;
     cin >> n >> m;
+
+    vector<vector<bool>> toy1(n, vector<bool>(n)), toy2(n, vector<bool>(n));
+    rep(i, m) {
+        i32 a, b;
+        cin >> a >> b;
+        --a, --b;
+        toy1[a][b] = true;
+        toy1[b][a] = true;
+    }
+    rep(i, m) {
+        i32 a, b;
+        cin >> a >> b;
+        --a, --b;
+        toy2[a][b] = true;
+        toy2[b][a] = true;
+    }
+
+    vector<i32> p(n);
+    iota(all(p), 0);
+
+    do {
+        bool ok = true;
+        rep(i, n) rep(j, n) {
+            if(toy1[i][j] != toy2[p[i]][p[j]]){
+                ok = false;
+            }
+        }
+
+        if(ok){
+            cout << "Yes\n";
+            return 0;
+        }
+    } while (next_permutation(all(p)));
+    cout << "No\n";
 }
