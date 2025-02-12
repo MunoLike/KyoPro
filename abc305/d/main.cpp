@@ -7,43 +7,70 @@ using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
-#define all(a) (a).begin(),(a).end()
+#define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
 
 template <class S, class T>
 inline S prevent_oor(S a, const T b) {
-  a %= b;
-  if (a < 0) {
-    a += b;
-  }
-  return a;
+    a %= b;
+    if (a < 0) {
+        a += b;
+    }
+    return a;
 }
 
 template <class S, class T>
 inline S chmax(S &a, T b) {
-  if (a < b) {
-    a = b;
-  }
-  return a;
+    if (a < b) {
+        a = b;
+    }
+    return a;
 }
 
 inline int64_t div_floor(int64_t a, int64_t b) {
-  if (b < 0) {
-    a *= -1;
-    b *= -1;
-  }
-  if (a < 0) {
-    return (a + 1) / b - 1;
-  } else {
-    return a / b;
-  }
+    if (b < 0) {
+        a *= -1;
+        b *= -1;
+    }
+    if (a < 0) {
+        return (a + 1) / b - 1;
+    } else {
+        return a / b;
+    }
 }
 
 inline int64_t div_ceil(int64_t a, int64_t b) {
-  return div_floor(a+b-1, b);
+    return div_floor(a + b - 1, b);
 }
 
 int main() {
+    i32 n;
+    cin >> n;
+    vector<i64> a(n);
+    rep(i, n) cin >> a[i];
 
+    vector<i64> s(n);
+    for (i32 i = 1; i < n; ++i) {
+        s[i] = s[i - 1];
+        if (i % 2 == 0) s[i] += a[i] - a[i - 1];
+    }
+
+    auto f = [&](i64 pos) {
+        i32 b = lower_bound(all(a), pos) - a.begin() - 1;
+        if (b < 0) return 0;
+        i32 res = s[b];
+        if (b % 2 == 1) res += pos - a[b];
+        return res;
+    };
+
+    i32 q;
+    cin >> q;
+    rep(i, q) {
+        i64 l, r;
+        cin >> l >> r;
+
+        i64 ans = f(r) - f(l);
+        cout << ans << '\n';
+    }
 }
