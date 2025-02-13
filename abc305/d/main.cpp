@@ -53,14 +53,14 @@ int main() {
     vector<i64> s(n);
     for (i32 i = 1; i < n; ++i) {
         s[i] = s[i - 1];
-        if (i % 2 == 0) s[i] += a[i] - a[i - 1];
+        if (i % 2 == 0) s[i] += a[i] - a[i - 1];  // 睡眠をまたいだ
     }
 
     auto f = [&](i64 pos) {
         i32 b = lower_bound(all(a), pos) - a.begin() - 1;
         if (b < 0) return 0;
         i32 res = s[b];
-        if (b % 2 == 1) res += pos - a[b];
+        if (b % 2 == 1) res += pos - a[b];  // 睡眠中なので中途半端な分を加算
         return res;
     };
 
