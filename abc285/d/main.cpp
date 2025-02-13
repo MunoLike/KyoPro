@@ -50,28 +50,24 @@ int main() {
 
     vector<string> s(n), t(n);
     map<string, string> to;
+    map<string, i32> mapper;
     set<string> used;
     rep(i, n) {
         cin >> s[i] >> t[i];
-        to.emplace(s[i], t[i]);
+        if (!mapper.contains(s[i])) mapper[s[i]] = mapper.size();
+        if (!mapper.contains(t[i])) mapper[t[i]] = mapper.size();
     }
 
-    for (string &ss : s) {
-        string ns = ss;
-        while (!used.contains(ns)) {
-            used.emplace(ns);
-            auto it = to.find(ns);
+    i32 sz = mapper.size();
+    atcoder::dsu ds(sz);
 
-            if (it != to.end()) {
-                ns = it->second;
-                if (ns == ss) {
-                    cout << "No\n";
-                    return 0;
-                }
-            } else {
-                break;
-            }
+    rep(i, n) {
+        i32 u = mapper[s[i]], v = mapper[t[i]];
+        if (ds.same(u, v)) {
+            cout << "No\n";
+            return 0;
         }
+        ds.merge(u, v);
     }
     cout << "Yes\n";
 }
