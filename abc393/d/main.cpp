@@ -66,28 +66,14 @@ int main() {
     string s;
     cin >> n >> s;
 
-    i64 weight = 0;
-    i64 one_cnt = 0;
-    for (i32 i = 0; i < n; ++i) {
-        if (s[i] == '1') {
-            weight += i;
-            ++one_cnt;
-        }
-    }
+    vector<i32> p;
+    rep(i, n) if (s[i] == '1') p.emplace_back(i);
+    i32 sz = p.size();
 
-    i64 start = weight / one_cnt - one_cnt / 2;
+    rep(i, sz) p[i] -= i;
+    i32 med = p[sz / 2];
 
-    vector<i32> place_idx(one_cnt);
-    for (i32 i = start, order = 0; i < start + one_cnt; ++i, ++order) {
-        place_idx[order] = i;
-    }
-
-    i64 sum = 0, order = 0;
-    rep(i, n) {
-        if (s[i] == '1') {
-            sum += abs(place_idx[order] - i);
-            ++order;
-        }
-    }
+    i64 sum = 0;
+    rep(i, sz) sum += abs(med - p[i]);
     cout << sum << endl;
 }
