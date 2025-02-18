@@ -63,4 +63,27 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+    vector<i64> cl1(n + 1), cl2(n + 1);
+    rep(i, n) {
+        i64 c, p;
+        cin >> c >> p;
+        if (c == 1) {
+            cl1[i + 1] = cl1[i] + p;
+            cl2[i + 1] = cl2[i];
+        } else {
+            cl2[i + 1] = cl2[i] + p;
+            cl1[i + 1] = cl1[i];
+        }
+    }
+
+    i32 q;
+    cin >> q;
+    rep(i, q) {
+        i64 l, r;
+        cin >> l >> r;
+        cout << cl1[r] - cl1[l - 1] << ' ' << cl2[r] - cl2[l - 1] << '\n';
+    }
 }
