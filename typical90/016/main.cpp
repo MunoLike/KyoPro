@@ -63,4 +63,18 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n, a, b, c;
+    cin >> n >> a >> b >> c;
+    i64 mi = (i64)1 << 60;
+    for (i64 i = 0; i <= 9999; ++i) {
+        for (i64 j = 0; i + j <= 9999; ++j) {
+            i64 residue = n - a * i - b * j;
+            if (residue >= 0 and residue % c == 0) {
+                i64 k = residue / c;
+                chmin(mi, i + j + k);
+            }
+        }
+    }
+    cout << mi << endl;
 }
