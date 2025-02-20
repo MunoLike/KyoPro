@@ -63,4 +63,14 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 a, b, c;
+    cin >> a >> b >> c;
+    i64 g = gcd(a, gcd(b, c));
+
+    i64 sum = 0;
+    sum += a / g - 1;
+    sum += b / g - 1;
+    sum += c / g - 1;
+    cout << sum << endl;
 }
