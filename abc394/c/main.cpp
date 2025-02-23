@@ -64,25 +64,13 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 int main() {
     string s;
     cin >> s;
-    deque<string> q;
-    q.emplace_back("");
     i32 n = s.size();
-    reverse(all(s));
-    rep(i, n) {
-        if (s[i] == 'W') {
-            if (q.back().back() == 'A') {
-                q.back().back() = 'C';
-                q.back() += 'A';
-            } else {
-                q.back() += s[i];
-            }
-        } else {
-            q.back() += s[i];
+    for (i32 i = n - 2; i >= 0; --i) {
+        if (s[i] == 'W' and s[i + 1] == 'A') {
+            s[i] = 'A';
+            s[i + 1] = 'C';
         }
     }
 
-    string ans;
-    for (auto ss : q) ans += ss;
-    reverse(all(ans));
-    cout << ans << endl;
+    cout << s << endl;
 }
