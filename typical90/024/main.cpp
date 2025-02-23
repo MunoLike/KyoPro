@@ -63,4 +63,25 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n, k;
+    cin >> n >> k;
+    vector<i64> a(n), b(n);
+    rep(i, n) cin >> a[i];
+    rep(i, n) cin >> b[i];
+
+    i64 diff = 0;
+    rep(i, n) diff += abs(a[i] - b[i]);
+
+    if (diff > k) {
+        cout << "No\n";
+        return 0;
+    }
+
+    if (diff % 2 != k % 2) {
+        cout << "No\n";
+        return 0;
+    }
+
+    cout << "Yes\n";
 }
