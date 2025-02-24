@@ -59,8 +59,29 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
+i64 n, p, q, ans = 0;
+void combination(vector<i64> &ref, vector<i32> &curs, i32 mi, i32 depth, i32 max_depth) {
+    if (depth == max_depth) {
+        i64 dot = 1;
+        for (i32 i = 0; i < max_depth; ++i) {
+            dot *= ref[curs[i]];
+            dot %= p;
+        }
+        if (dot == q) ++ans;
+    } else {
+        i32 sz = ref.size();
+        for (i32 i = mi; i < sz; ++i) {
+            curs[depth] = i;
+            combination(ref, curs, i + 1, depth + 1, max_depth);
+        }
+    }
+}
+
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+    cin >> n >> p >> q;
+    vector<i64> a(n);
+    rep(i, n) cin >> a[i];
+    vector<i32> curs(5);
+    combination(a, curs, 0, 0, 5);
+    cout << ans << endl;
 }
