@@ -63,4 +63,24 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+    i32 q;
+    cin >> q;
+    deque<i32> queue;
+    rep(i, q) {
+        i32 t, x;
+        cin >> t >> x;
+        switch (t) {
+            case 1:
+                queue.emplace_front(x);
+                break;
+            case 2:
+                queue.emplace_back(x);
+                break;
+            case 3:
+                cout << queue[x - 1] << '\n';
+                break;
+            default:
+                break;
+        }
+    }
 }
