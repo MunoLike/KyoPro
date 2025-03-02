@@ -2,10 +2,12 @@
 
 #include <atcoder/all>
 using namespace std;
+using namespace atcoder;
 using i32 = int32_t;
 using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
+using mint = modint998244353;
 #define rep(i, n) for (i32 i = 0; i < (n); i++)
 #define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
 #define all(a) (a).begin(), (a).end()
@@ -59,28 +61,5 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
-i64 
-
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-
-    i64 n, k;
-    cin >> n >> k;
-
-    i64 octet = n;
-    rep(i, k) {
-        i64 m = 1, novtet = 0;
-        while (octet > 0) {
-            i64 mod = octet % 9;
-            if (mod == 8) mod = 5;
-            novtet += mod;
-            octet /= 9;
-
-            novtet *= m;
-            m *= 9;
-        }
-        octet = novtet;
-    }
 }
