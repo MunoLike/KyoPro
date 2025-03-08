@@ -59,28 +59,47 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
-i64 
+i64 oct_to_dec(string oct) {
+    i64 ret = 0;
+    rep(i, oct.size()) {
+        ret *= 8;
+        ret += oct[i] - '0';
+    }
+    return ret;
+}
+
+string dec_to_nov(i64 dec) {
+    string ret;
+    while (dec > 0) {
+        ret.push_back(dec % 9 + '0');
+        dec /= 9;
+    }
+    reverse(all(ret));
+    return ret;
+}
+
+string nov_to_oct(string nov) {
+    rep(i, nov.size()) {
+        if (nov[i] == '8') nov[i] = '5';
+    }
+    return nov;
+}
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
 
-    i64 n, k;
+    string n;
+    i32 k;
     cin >> n >> k;
 
-    i64 octet = n;
     rep(i, k) {
-        i64 m = 1, novtet = 0;
-        while (octet > 0) {
-            i64 mod = octet % 9;
-            if (mod == 8) mod = 5;
-            novtet += mod;
-            octet /= 9;
-
-            novtet *= m;
-            m *= 9;
-        }
-        octet = novtet;
+        n = nov_to_oct(dec_to_nov(oct_to_dec(n)));
     }
+
+    if (n == "")
+        cout << 0 << endl;
+    else
+        cout << n << endl;
 }
