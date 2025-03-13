@@ -63,4 +63,19 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n;
+    cin >> n;
+    vector<i64> a(n), b(n);
+    rep(i, n) cin >> a[i];
+    rep(i, n) cin >> b[i];
+
+    sort(all(a));
+    sort(all(b));
+
+    i64 sum = 0;
+    rep(i, n) {
+        sum += abs(a[i] - b[i]);
+    }
+    cout << sum << endl;
 }
