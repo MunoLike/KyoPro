@@ -63,4 +63,20 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 t, l, x, y, q;
+    cin >> t >> l >> x >> y >> q;
+    vector<i64> e(q);
+    rep(i, q) cin >> e[i];
+
+    rep(i, q) {
+        double cy = (double)l / 2. * -sin((e[i] % t) / (double)t * 2. * M_PI);
+        double cz = (double)l / 2. * (1 - cos((e[i] % t) / (double)t * 2. * M_PI));
+
+        double a = x * x + (y - cy) * (y - cy) + cz * cz;
+        double b = cz * cz;
+
+        double ans = asin(sqrt(b / a)) * 180. / M_PI;
+        cout << setprecision(14) << ans << '\n';
+    }
 }

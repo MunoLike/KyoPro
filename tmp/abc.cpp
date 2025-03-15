@@ -62,11 +62,6 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    vector<i32> a = {1, 2, 3, 3, 5, 6}, b(a);
-    reverse(all(b));
-
-    cout << lower_bound(all(a), 3) - a.begin() << endl;
-    cout << upper_bound(all(a), 3) - a.begin() << endl;
-    cout << lower_bound(all(b), 3, greater()) - b.begin() << endl;
-    cout << upper_bound(all(b), 3, greater()) - b.begin() << endl;
+    i32 a = 10;
+    cout << setprecision(10) << a / (double)3 << endl;
 }
