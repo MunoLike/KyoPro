@@ -65,22 +65,28 @@ int main() {
     i32 n;
     cin >> n;
     vector<i32> a(n);
+
+    vector<bool> lv(n + 1), rv(n + 1);
     rep(i, n) cin >> a[i];
 
-    map<i32, i32> s1, s2;
-
+    vector<i32> s1(n), s2(n);
+    i32 s = 0;
     rep(i, n) {
-        ++s2[a[i]];
+        if (!lv[a[i]]) ++s;
+        lv[a[i]] = true;
+        s1[i] = s;
+    }
+
+    s = 0;
+    for (i32 i = n - 1; i >= 0; --i) {
+        if (!rv[a[i]]) ++s;
+        rv[a[i]] = true;
+        s2[i] = s;
     }
 
     i32 mx = 0;
-    rep(i, n) {
-        ++s1[a[i]];
-        --s2[a[i]];
-
-        if (s2[a[i]] == 0) s2.erase(a[i]);
-
-        chmax(mx, s1.size() + s2.size());
+    rep(i, n-1) {
+        chmax(mx, s1[i] + s2[i + 1]);
     }
     cout << mx << endl;
 }
