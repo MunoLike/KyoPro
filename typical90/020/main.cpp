@@ -63,4 +63,14 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 a, b, c;
+    cin >> a >> b >> c;
+
+    i64 powed = 1;
+    rep(i, b) {
+        powed *= c;
+    }
+
+    cout << (a < powed ? "Yes" : "No") << endl;
 }
