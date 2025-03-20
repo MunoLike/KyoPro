@@ -63,4 +63,44 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+    vector<vector<i64>> a(n, vector<i64>(n));
+    rep(i, n) rep(j, n) cin >> a[i][j];
+
+    i32 m;
+    cin >> m;
+    vector<set<i32>> edges(n);
+    rep(i, m) {
+        i32 x, y;
+        cin >> x >> y;
+        --x, --y;
+        edges[x].emplace(y);
+        edges[y].emplace(x);
+    }
+
+    vector<i32> path;
+    rep(i, n) path.emplace_back(i);
+
+    i64 mi = INT64_MAX;
+    do {
+        i64 elapssed = 0;
+        bool cannot = false;
+        elapssed += a[path[0]][0];
+        for (i32 i = 1; i < n; ++i) {
+            if (edges[path[i - 1]].contains(path[i])) {
+                cannot = true;
+                break;
+            }
+            elapssed += a[path[i]][i];
+        }
+        if (cannot) continue;
+        chmin(mi, elapssed);
+    } while (next_permutation(all(path)));
+
+    if (mi == INT64_MAX)
+        cout << -1 << endl;
+    else
+        cout << mi << endl;
 }
