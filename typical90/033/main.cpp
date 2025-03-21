@@ -63,4 +63,12 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 h, w;
+    cin >> h >> w;
+
+    if (h == 1 or w == 1)
+        cout << h * w << endl;
+    else
+        cout << div_ceil(h, 2) * div_ceil(w, 2) << endl;
 }
