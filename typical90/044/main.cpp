@@ -60,7 +60,28 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+    i32 n, q;
+    cin >> n >> q;
+    vector<i32> a(n);
+    rep(i, n) cin >> a[i];
+
+    i32 offset = 0;
+    rep(i, q) {
+        i32 t, x, y;
+        cin >> t >> x >> y;
+        --x, --y;
+        switch (t) {
+            case 1:
+                swap(a[prevent_oor(x + offset, n)], a[prevent_oor(y + offset, n)]);
+                break;
+            case 2:
+                offset = prevent_oor(offset - 1, n);
+                break;
+            case 3:
+                cout << a[prevent_oor(x + offset, n)] << endl;
+                break;
+            default:
+                break;
+        }
+    }
 }
