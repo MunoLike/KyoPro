@@ -63,4 +63,30 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+    vector<i32> a(n), b(n), c(n), amod(46), bmod(46), cmod(46);
+    rep(i, n) cin >> a[i];
+    rep(i, n) cin >> b[i];
+    rep(i, n) cin >> c[i];
+
+    rep(i, n) {
+        ++amod[a[i] % 46];
+        ++bmod[b[i] % 46];
+        ++cmod[c[i] % 46];
+    }
+
+    i32 ans = 0;
+    rep(i, 46) {
+        rep(j, 46) {
+            rep(k, 46) {
+                i32 msum = i + j + k;
+                if (msum % 46 == 0) {
+                    ans += (i64)amod[i] * bmod[j] * cmod[k];
+                }
+            }
+        }
+    }
+    cout << ans << endl;
 }
