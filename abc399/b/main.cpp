@@ -2,14 +2,18 @@
 
 #include <atcoder/all>
 using namespace std;
+using namespace atcoder;
 using i32 = int32_t;
 using i64 = int64_t;
 using u32 = uint32_t;
 using u64 = uint64_t;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+using mint = modint998244353;
+#define rep(i, n) for (i32 i = 0; i < (n); i++)
+#define rep1(i, n) for (i32 i = 1; i <= (n); (i)++)
 #define all(a) (a).begin(), (a).end()
 const i32 dy[] = {-1, 0, 1, 0, -1, -1, 1, 1};
 const i32 dx[] = {0, 1, 0, -1, -1, 1, 1, -1};
+const string lrud("URDL");
 
 template <class S, class T>
 inline S prevent_oor(S a, const T b) {
@@ -21,8 +25,21 @@ inline S prevent_oor(S a, const T b) {
 }
 
 template <class S, class T>
+inline bool is_in(const T lower, S a, const T upper) {
+    return a < upper && lower <= a;
+}
+
+template <class S, class T>
 inline S chmax(S &a, T b) {
     if (a < b) {
+        a = b;
+    }
+    return a;
+}
+
+template <class S, class T>
+inline S chmin(S &a, T b) {
+    if (a > b) {
         a = b;
     }
     return a;
@@ -45,43 +62,22 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 N, M;
-    cin >> N >> M;
-
-    vector<vector<i32>> edges(N);
-    vector<bool> visited(N);
-
-    rep(i, M) {
-        i32 A, B;
-        cin >> A >> B;
-        --A, --B;
-        edges[A].emplace_back(B);
-        edges[B].emplace_back(A);
+    i32 n;
+    cin >> n;
+    vector<i32> p(n), rank(n, -1);
+    map<i32, vector<i32>> pt_member;
+    rep(i, n) {
+        cin >> p[i];
+        pt_member[p[i]].emplace_back(i);
     }
 
-    queue<i32> Q;
-
-    i32 need2del = 0;
-    i32 connected = 0;
-    rep(i, N) {
-        if (visited[i]) {
-            continue;
+    i32 r = 1;
+    for (auto it = pt_member.rbegin(); it != pt_member.rend(); ++it) {
+        for (auto idx : it->second) {
+            rank[idx] = r;
         }
-        ++connected;
-        Q.emplace(i);
-        visited[i] = true;
-        while (!Q.empty()) {
-            i32 fr = Q.front();
-            Q.pop();
-
-            auto &es = edges[fr];
-            for (auto e : es) {
-                if (visited[e]) continue;
-                Q.emplace(e);
-                visited[e] = true;
-            }
-        }
+        r += it->second.size();
     }
 
-    cout << M - N + connected << endl;
+    rep(i, n) cout << rank[i] << '\n';
 }
