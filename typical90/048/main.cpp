@@ -28,7 +28,7 @@ inline bool is_in(const T lower, S a, const T upper) {
 }
 
 template <class S, class T>
-inline S chmax(S &a, T b) {
+inline S chmax(S& a, T b) {
     if (a < b) {
         a = b;
     }
@@ -36,7 +36,7 @@ inline S chmax(S &a, T b) {
 }
 
 template <class S, class T>
-inline S chmin(S &a, T b) {
+inline S chmin(S& a, T b) {
     if (a > b) {
         a = b;
     }
@@ -63,4 +63,20 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n, k;
+    cin >> n >> k;
+    vector<i64> points(2 * n);
+
+    rep(i, n) {
+        i32 a, b;
+        cin >> a >> b;
+        points[i * 2] = b;
+        points[i * 2 + 1] = a - b;
+    }
+
+    sort(all(points),greater<i64>());
+
+    i64 sum = reduce(points.begin(), points.begin() + k);
+    cout << sum << endl;
 }
