@@ -63,4 +63,20 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n, l;
+    cin >> n >> l;
+
+    const i64 divmod = 1000000000 + 7;
+    vector<i64> path_count(n + 1);
+    path_count[0] = 1;
+
+    for (i32 i = 1; i <= n; ++i) {
+        if (i < l) {
+            path_count[i] = path_count[i - 1];
+        } else {
+            path_count[i] = (path_count[i - 1] + path_count[i - l]) % divmod;
+        }
+    }
+    cout << path_count[n] << endl;
 }
