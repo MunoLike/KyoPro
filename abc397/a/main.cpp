@@ -64,7 +64,7 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 int main() {
     double x;
     cin >> x;
-    if (x >= 40)
+    if (x >= 38)
         cout << 1;
     else if (x >= 37.5)
         cout << 2;

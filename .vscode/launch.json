@@ -14,7 +14,7 @@
                 "<",
                 "${fileDirname}/test/sample-1.in"
             ],
-            "stopAtEntry": false,
+            "stopAtEntry": true,
             "cwd": "${fileDirname}",
             "environment": [],
             "externalConsole": false,
@@ -35,6 +35,11 @@
             ],
             "sourceFileMap": {
                 "${fileDirname}": "${fileDirname}"
+            },
+            "logging": {
+                "engineLogging": true,
+                "trace": true,
+                "traceResponse": true
             }
         }
     ]

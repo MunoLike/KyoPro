@@ -10,10 +10,10 @@
             "command": "time",
             "args": [
                 "g++-13",
+                "-g3",
                 "-I",
                 "${workspaceFolder}/ac-library/",
                 "-std=c++2b",
-                "-g",
                 "-O0",
                 "-fsanitize=address,undefined",
                 "-fno-omit-frame-pointer",

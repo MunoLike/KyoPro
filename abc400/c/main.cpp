@@ -62,21 +62,14 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    vector<i32> a(7);
-    rep(i, 7) cin >> a[i];
+    i64 n;
+    cin >> n;
 
-    map<i32, i32> kind_cnt;
-    rep(i, 7) {
-        ++kind_cnt[a[i]];
+    i64 count = 0;
+    for (i64 a = 1; a <= n; a *= 2) {
+        i64 mxb = n / a;
+        for (i64 b = 1; b * b <= mxb; ++b) {
+            if (a * b * b <= n) ++count;
+        }
     }
-
-    bool is_2 = false, is_3 = false;
-    for (auto [val, cnt] : kind_cnt) {
-        if (!is_3 and val >= 3)
-            is_3 = true;
-        else if (val >= 2)
-            is_2 = true;
-    }
-
-    cout << (is_2 and is_3 ? "Yes" : "No") << endl;
 }
