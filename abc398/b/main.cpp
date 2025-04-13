@@ -72,9 +72,9 @@ int main() {
 
     bool is_2 = false, is_3 = false;
     for (auto [val, cnt] : kind_cnt) {
-        if (!is_3 and val >= 3)
+        if (!is_3 and cnt >= 3)
             is_3 = true;
-        else if (val >= 2)
+        else if (cnt >= 2)
             is_2 = true;
     }
 
