@@ -65,11 +65,11 @@ int main() {
     i64 n;
     cin >> n;
 
-    i64 count = 0;
-    for (i64 a = 1; a <= n; a *= 2) {
-        i64 mxb = n / a;
-        for (i64 b = 1; b * b <= mxb; ++b) {
-            if (a * b * b <= n) ++count;
-        }
+    i64 ans = 0;
+    for (i64 a = 2; a <= n; a *= 2) {
+        i64 bb = n / a;
+        i64 b = sqrtl(bb);  // doubleだと仮数部の精度が2^53≒9e15ぐらいしかなく不十分であるためsqrtl(2^64)を使う。
+        ans += (b + 1) / 2;
     }
+    cout << ans << endl;
 }
