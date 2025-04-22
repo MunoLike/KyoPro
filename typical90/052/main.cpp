@@ -60,7 +60,27 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    const i64 MOD = 1000000000 + 7;
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+
+    vector<vector<i64>> a(n, vector<i64>(6));
+    rep(i, n) rep(j, 6) {
+        cin >> a[i][j];
+    }
+
+    i64 prod = 1;
+    rep(i, n) {
+        i64 sum = 0;
+        rep(j, 6) {
+            sum += a[i][j];
+        }
+
+        prod = (prod % MOD * sum % MOD) % MOD;
+    }
+    cout << prod << endl;
 }
