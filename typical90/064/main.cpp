@@ -63,4 +63,31 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n, q;
+    cin >> n >> q;
+    vector<i64> height(n + 1), height_diff(n + 1);
+
+    for (i32 i = 1; i <= n; ++i) {
+        cin >> height[i];
+    }
+
+    i64 diff = 0;
+    for (i32 i = 1; i <= n - 1; ++i) {
+        height_diff[i] = height[i + 1] - height[i];
+        diff += abs(height_diff[i]);
+    }
+
+    rep(i, q) {
+        i64 l, r, v;
+        cin >> l >> r >> v;
+
+        i64 before = abs(height_diff[l - 1]) + abs(height_diff[r]);
+        if (2 <= l) height_diff[l - 1] += v;
+        if (r <= n - 1) height_diff[r] -= v;
+        i64 after = abs(height_diff[l - 1]) + abs(height_diff[r]);
+
+        diff += (after - before);
+        cout << diff << '\n';
+    }
 }
