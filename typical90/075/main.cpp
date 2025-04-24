@@ -59,8 +59,36 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
+vector<i64> prime_factor(i64 n) {
+    i64 rem = n;
+    vector<i64> ans;
+    for (i64 i = 2; i * i <= n; ++i) {
+        while (rem % i == 0) {
+            ans.emplace_back(i);
+            rem /= i;
+        }
+    }
+
+    if (rem != 1) ans.emplace_back(rem);
+    return ans;
+}
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n;
+    cin >> n;
+
+    auto factors = prime_factor(n);
+    i64 opcnt = 0;
+    for (i32 i = 0; i <= 6; ++i) {  // 2^x >= 素因数分解で出てきた数の個数。最大でlog_2 (log_2 n) = 5.32...個
+        if (1U << i >= factors.size()) {
+            opcnt = i;
+            break;
+        }
+    }
+
+    cout << opcnt << endl;
 }
