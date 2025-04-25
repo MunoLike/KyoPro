@@ -63,4 +63,33 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 n;
+    cin >> n;
+    vector<i64> a(n * 2);
+    i64 all = 0;
+    rep(i, n) {
+        cin >> a[i];
+        all += a[i];
+        a[n + i] = a[i];
+    }
+
+    i32 l = 0;
+    i64 ps = 0;
+
+    // if (all % 10 == 0) {
+    rep(r, 2 * n) {
+        ps += a[r];
+        while (10 * ps > all) {
+            ps -= a[l];
+            ++l;
+        }
+        if (10 * ps == all) {
+            cout << "Yes\n";
+            return 0;
+        }
+    }
+    // }
+
+    cout << "No" << endl;
 }
