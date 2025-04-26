@@ -63,4 +63,45 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i32 h, w;
+    cin >> h >> w;
+
+    vector<vector<i32>> a(h, vector<i32>(w)), b(h, vector<i32>(w));
+    rep(i, h) {
+        rep(j, w) {
+            cin >> a[i][j];
+        }
+    }
+    rep(i, h) {
+        rep(j, w) {
+            cin >> b[i][j];
+        }
+    }
+
+    i64 opcnt = 0;
+    rep(i, h - 1) {
+        rep(j, w - 1) {
+            i32 diff = b[i][j] - a[i][j];
+            opcnt += abs(diff);
+            rep(k, 2) rep(l, 2) {
+                a[i + k][j + l] += diff;
+            }
+        }
+    }
+
+    bool is_eq = true;
+    for (i32 i = 0; i < h - 1; ++i) {
+        is_eq &= a[i][w - 1] == b[i][w - 1];
+    }
+    for (i32 i = 0; i < w - 1; ++i) {
+        is_eq &= a[h - 1][i] == b[h - 1][i];
+    }
+
+    if (is_eq) {
+        cout << "Yes\n";
+        cout << opcnt << "\n";
+    } else {
+        cout << "No\n";
+    }
 }
