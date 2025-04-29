@@ -59,8 +59,26 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
     return div_floor(a + b - 1, b);
 }
 
+using mint = atcoder::modint1000000007;
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    u64 l, r;
+    cin >> l >> r;
+
+    mint ans = 0;
+    for (i32 i = 1; i <= 19; ++i) {
+        u64 left = max((u64)pow(10, i - 1), l);
+        u64 right = min((u64)pow(10, i) - 1, r);
+        if (left > right) continue;
+
+        mint ll(left), rr(right);
+        mint a = (ll + rr) * (rr - ll + 1) / 2;
+        ans += a * i;
+    }
+
+    cout << ans.val() << endl;
 }
