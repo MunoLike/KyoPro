@@ -63,4 +63,25 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    i64 n;
+    string s;
+    cin >> n >> s;
+
+    vector<i64> continuous_cnt;
+    i64 cnt = 0;
+    rep(i, n) {
+        ++cnt;
+        if (s[i] != s[i + 1]) {
+            continuous_cnt.emplace_back(cnt);
+            cnt = 0;
+        }
+    }
+
+    i64 sub = 0;
+    rep(i, continuous_cnt.size()) {
+        sub += continuous_cnt[i] * (1 + continuous_cnt[i]) / 2;
+    }
+
+    cout << n * (1 + n) / 2 - sub << endl;
 }
