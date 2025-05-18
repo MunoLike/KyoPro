@@ -74,13 +74,13 @@ int main() {
 
     rep(i, n) cin >> a[i];
 
-    __uint128_t prod = 1;
+    u64 prod = 1;
     rep(i, n) {
-        prod *= (__uint128_t)a[i];
-        if (prod > mx) {
+        if (prod > mx / a[i]) {
             prod = 1;
+        } else {
+            prod *= a[i];
         }
     }
-
-    cout << (u64)prod << endl;
+    cout << prod << endl;
 }

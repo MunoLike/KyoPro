@@ -65,15 +65,18 @@ int main() {
     i32 h, w, n;
     cin >> h >> w >> n;
 
-    vector<set<i32>> row(h), column(w);  // 横方向に見たときの個数と縦方向に見たときの個数を.size()で持つ。また、指定した行の何個目の列にあるかを持つ。行も同様。
+    vector<vector<i32>> row(h), column(w);  // 横方向に見たときの個数と縦方向に見たときの個数を.size()で持つ。また、指定した行の何個目の列にあるかを持つ。行も同様。
+
+    vector<bool> row_erase(h, false), column_erase(w, false);  // 行と列の消去フラグ
+    vector<bool> erased(n, false);                             // 消去済みフラグ
 
     rep(i, n) {
         i32 x, y;
         cin >> x >> y;
         x--;
         y--;
-        row[x].emplace(y);
-        column[y].emplace(x);
+        row[x].emplace_back(i);
+        column[y].emplace_back(i);
     }
 
     i32 q;
@@ -84,20 +87,36 @@ int main() {
         --pos;
         switch (c) {
             case 1: {
-                cout << row[pos].size() << '\n';
-                for (i32 y : row[pos]) {
-                    column[y].erase(pos);
+                if (row_erase[pos]) {
+                    cout << 0 << '\n';
+                    continue;
+                } else {
+                    i32 cnt = 0;
+                    for (i32 g : row[pos]) {
+                        if (!erased[g]) {
+                            cnt++;
+                            erased[g] = true;
+                        }
+                    }
+                    cout << cnt << '\n';
+                    row_erase[pos] = true;
                 }
-
-                row[pos].clear();
             } break;
             case 2: {
-                cout << column[pos].size() << '\n';
-                for (i32 x : column[pos]) {
-                    row[x].erase(pos);
+                if (column_erase[pos]) {
+                    cout << 0 << '\n';
+                    continue;
+                } else {
+                    i32 cnt = 0;
+                    for (i32 g : column[pos]) {
+                        if (!erased[g]) {
+                            cnt++;
+                            erased[g] = true;
+                        }
+                    }
+                    cout << cnt << '\n';
+                    column_erase[pos] = true;
                 }
-
-                column[pos].clear();
             } break;
         }
     }

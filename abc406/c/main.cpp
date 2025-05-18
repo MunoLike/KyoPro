@@ -62,4 +62,37 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
+    i32 n;
+    cin >> n;
+    vector<i32> p(n);
+    rep(i, n) { cin >> p[i]; }
+
+    vector<i32> table(n - 1);
+    for (i32 i = 0; i < n - 1; ++i) {
+        table[i] = (p[i + 1] < p[i]) ? 0 : 1;
+    }
+
+    vector<pair<i32, i32>> rle;
+    rle.emplace_back(1, 0);
+    for (i32 i = 0; i < n - 1; ++i) {
+        auto [v, c] = rle.back();
+        if (table[i] == v) {
+            ++rle.back().second;
+        } else {
+            rle.emplace_back(table[i], 1);
+        }
+    }
+
+    i64 ans = 0;
+    rep(i, rle.size()) {
+        auto [v, c] = rle[i];
+        if (v == 0) {
+            i32 l = 0;
+            i32 r = 0;
+            if (0 < i) l = rle[i - 1].second;
+            if (i + 1 < rle.size()) r = rle[i + 1].second;
+            ans += (i64)l * r;
+        }
+    }
+    cout << ans << endl;
 }
