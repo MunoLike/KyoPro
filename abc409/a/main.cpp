@@ -62,37 +62,17 @@ inline int64_t div_ceil(int64_t a, int64_t b) {
 }
 
 int main() {
-    i32 t;
-    cin >> t;
+    i32 n;
+    cin >> n;
+    string t, a;
+    cin >> t >> a;
 
-    rep(_, t) {
-        i32 n;
-        string s;
-        cin >> n >> s;
-
-        vector<pair<i32, i32>> one_lr;
-        bool in_one = false;
-        rep(i, n) {
-            if (!in_one and s[i] == '1') {
-                in_one = true;
-                one_lr.emplace_back(i, i);
-            } else if (in_one and s[i] == '0') {
-                in_one = false;
-                one_lr.back().second = i - 1;
-            }
-        }
-
-        if (in_one) {
-            one_lr.back().second = n - 1;
-        }
-
-        i32 cnt = 0;
-        i32 l = 0, r = 0;
-
-        if (!one_lr.empty()) {
-            l = one_lr[0].second;
-            for (i32 i = 1; i < one_lr.size(); i++) {
-            }
+    rep(i, n) {
+        if (t[i] == 'o' and t[i] == a[i]) {
+            cout << "Yes" << endl;
+            return 0;
         }
     }
+
+    cout << "No" << endl;
 }
